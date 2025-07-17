@@ -1,6 +1,6 @@
 {
 	"name": "Widgets Collection",
-	"description": "Widget聚合",
+	"description": "集合聚合",
 	"icon": "https://github.com/pack1r/ForwardWidgets/raw/main/icon.png",
 	"widgets": [
 		{
@@ -56,6 +56,15 @@
 			"version": "2.1.0",
 			"author": "Ti",
 			"url": "https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/widgets/javrate.js"
+		},
+		{
+			"id": "jable",
+			"title": "Jable",
+			"description": "获取 Jable 视频",
+			"requiredVersion": "0.0.1",
+			"version": "1.0.8",
+			"author": "nibiru",
+			"url": "https://raw.githubusercontent.com/quantumultxx/ForwardWidgets/refs/heads/main/Widgets/Jable.js"
 		},
 		{
 			"id": "ti.bemarkt.podcast",
