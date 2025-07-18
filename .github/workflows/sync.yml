@@ -54,6 +54,9 @@ jobs:
     - name: 执行更新
       run: bash scripts/update.sh
     
+    - name: 执行聚合
+      run: bash scripts/aggregate.sh
+    
     - name: 检查更改
       id: check
       run: |
