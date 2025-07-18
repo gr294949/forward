@@ -88,27 +88,6 @@ for repo in $repos; do
     fi
 done
 
-# 汇聚Widget模块（在版本更新之前）
-echo "🔗 汇聚Widget模块..."
-if [ -f "scripts/aggregate.sh" ]; then
-    chmod +x scripts/aggregate.sh
-    ./scripts/aggregate.sh
-    if [ $? -eq 0 ]; then
-        echo "✅ Widget汇聚完成！"
-        # 添加汇聚产生的文件到Git暂存区
-        git add *.fwd 2>/dev/null || true
-        # 检查汇聚是否产生了新文件
-        if [ -n "$(git status --porcelain forward-widgets.fwd widgets.fwd 2>/dev/null)" ]; then
-            HAS_UPDATES=true
-            echo "📝 汇聚产生了新的更改"
-        fi
-    else
-        echo "⚠️  Widget汇聚失败，但不影响主流程"
-    fi
-else
-    echo "⚠️  汇聚脚本不存在，跳过汇聚步骤"
-fi
-
 # 如果有更新，记录日志
 if [ "$HAS_UPDATES" = true ]; then
     echo "\n📝 更新日志..."
