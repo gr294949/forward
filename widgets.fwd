@@ -58,6 +58,15 @@
 			"url": "https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/widgets/javrate.js"
 		},
 		{
+			"id": "jable",
+			"title": "Jable",
+			"description": "获取Jable全站视频",
+			"requiredVersion": "0.0.1",
+			"version": "1.0.6",
+			"author": "nibiru",
+			"url": "https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/widgets/jable.js"
+		},
+		{
 			"id": "letterboxd",
 			"title": "Letterboxd电影爱好者平台",
 			"description": "解析Letterboxd片单内的影片【五折码：CHEAP.5;七折码：CHEAP】",
