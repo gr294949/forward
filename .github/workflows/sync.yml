@@ -33,17 +33,17 @@ jobs:
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-    
-    - name: 设置Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
         
     - name: 安装依赖
       run: |
         sudo apt-get update
         sudo apt-get install -y jq rsync curl
-        chmod +x scripts/update.sh scripts/aggregate.sh
+        chmod +x scripts/update.sh scripts/aggregate.sh scripts/test_scripts.sh
+        
+    - name: 运行环境测试
+      run: |
+        echo "🧪 运行环境测试..."
+        bash scripts/test_scripts.sh
     
     - name: 处理手动参数
       if: github.event_name == 'workflow_dispatch' && github.event.inputs.repository_name != ''
@@ -52,10 +52,20 @@ jobs:
         mv config/repos.tmp.json config/repos.json
     
     - name: 执行更新
-      run: bash scripts/update.sh
+      run: |
+        echo "开始执行更新脚本..."
+        bash scripts/update.sh || {
+          echo "更新脚本执行失败，但继续执行聚合步骤"
+          exit 0
+        }
     
     - name: 执行聚合
-      run: bash scripts/aggregate.sh
+      run: |
+        echo "开始执行聚合脚本..."
+        bash scripts/aggregate.sh || {
+          echo "聚合脚本执行失败"
+          exit 1
+        }
     
     - name: 检查更改
       id: check
@@ -74,7 +84,7 @@ jobs:
         echo "当前版本: $CURRENT"
         
         # 获取最新的标签版本
-        LATEST_TAG=$(git tag -l | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1)
+        LATEST_TAG=$(git tag -l | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1 || echo "")
         if [ -n "$LATEST_TAG" ]; then
           LATEST_VERSION=${LATEST_TAG#v}
           echo "最新标签版本: $LATEST_VERSION"
