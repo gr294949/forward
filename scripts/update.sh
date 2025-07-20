@@ -118,3 +118,63 @@ echo "🧹 清理临时文件..."
 rm -rf $TEMP_DIR
 
 echo "✅ 自动更新完成！"
+
+# 在关键步骤添加错误检查
+clone_or_update_repo() {
+    local repo_url=$1
+    local target_dir=$2
+    local branch=$3
+    
+    echo "📥 处理仓库: $repo_url"
+    
+    if [ -d "$target_dir" ]; then
+        echo "  🔄 更新现有仓库..."
+        if ! git -C "$target_dir" fetch origin "$branch" 2>/dev/null; then
+            echo "  ❌ 获取更新失败: $repo_url"
+            return 1
+        fi
+        
+        if ! git -C "$target_dir" reset --hard "origin/$branch" 2>/dev/null; then
+            echo "  ❌ 重置失败: $repo_url"
+            return 1
+        fi
+    else
+        echo "  📦 克隆新仓库..."
+        if ! git clone --depth 1 --branch "$branch" "$repo_url" "$target_dir" 2>/dev/null; then
+            echo "  ❌ 克隆失败: $repo_url"
+            return 1
+        fi
+    fi
+    
+    echo "  ✅ 成功"
+    return 0
+}
+
+# 在更新前验证仓库配置
+validate_repos() {
+    local config_file="$1"
+    
+    echo "🔍 验证仓库配置..."
+    
+    if [ ! -f "$config_file" ]; then
+        echo "❌ 配置文件不存在: $config_file"
+        return 1
+    fi
+    
+    local invalid_count=0
+    while IFS= read -r repo_line; do
+        if [[ $repo_line =~ ^[[:space:]]*"url" ]]; then
+            repo_url=$(echo "$repo_line" | sed 's/.*"url": "\([^"]*\)".*/\1/')
+            if ! curl -s --head --max-time 10 "$repo_url" >/dev/null; then
+                echo "⚠️  仓库不可访问: $repo_url"
+                ((invalid_count++))
+            fi
+        fi
+    done < "$config_file"
+    
+    if [ $invalid_count -gt 0 ]; then
+        echo "⚠️  发现 $invalid_count 个不可访问的仓库"
+    fi
+    
+    return 0
+}

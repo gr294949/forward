@@ -180,3 +180,44 @@ echo -e "\n${YELLOW}📋 模块列表:${NC}"
 jq -r '.[] | "  • \(.title) (\(.id))"' "$TEMP_WIDGETS" | sort
 
 echo -e "\n${GREEN}🎉 汇聚脚本执行完成！${NC}"
+
+# 优化URL验证逻辑
+validate_url() {
+    local url=$1
+    local max_retries=3
+    local retry_count=0
+    
+    # 跳过本地文件URL
+    if [[ $url == file://* ]]; then
+        return 0
+    fi
+    
+    while [ $retry_count -lt $max_retries ]; do
+        if curl -s --head --max-time 10 --connect-timeout 5 "$url" >/dev/null 2>&1; then
+            return 0
+        fi
+        
+        ((retry_count++))
+        if [ $retry_count -lt $max_retries ]; then
+            sleep 1
+        fi
+    done
+    
+    return 1
+}
+
+# 添加详细的统计报告
+generate_statistics() {
+    local total_files=$1
+    local valid_modules=$2
+    local invalid_urls=$3
+    local duplicate_count=$4
+    
+    echo "📊 聚合统计报告"
+    echo "================"
+    echo "处理的.fwd文件: $total_files"
+    echo "有效模块: $valid_modules"
+    echo "无效URL: $invalid_urls"
+    echo "去重数量: $duplicate_count"
+    echo "成功率: $(( valid_modules * 100 / (total_files > 0 ? total_files : 1) ))%"
+}
