@@ -104,6 +104,10 @@ WidgetMetadata = {
               value: "https://m.douban.com/subject_collection/show_hot",
             },
             {
+              title: "热播动漫",
+              value: "https://m.douban.com/subject_collection/tv_animation",
+            },
+            {
               title: "影院热映",
               value: "https://m.douban.com/subject_collection/movie_showing",
             },
@@ -1166,11 +1170,17 @@ WidgetMetadata = {
           title: "页码",
           type: "page"
         },
-
       ],
     },
+    {
+      title: "豆瓣首页轮播图(用于首页和apple tv topshelf)",
+      requiresWebView: false,
+      functionName: "loadCarouselItems",
+      description: "从豆瓣热播电影/电视剧/综艺/动漫分别随机获取3个未在影院上映的影片，并乱序后返回总共12个影片",
+      cacheDuration: 3600,
+    },
   ],
-  version: "1.0.13",
+  version: "1.0.14",
   requiredVersion: "0.0.1",
   description: "解析豆瓣想看、在看、已看以及根据个人数据生成的个性化推荐【五折码：CHEAP.5;七折码：CHEAP】",
   author: "huangxd",
@@ -1297,13 +1307,55 @@ async function fetchTmdbData(key, mediaType) {
     return tmdbResults.results;
 }
 
+function cleanTitle(title) {
+    // 特殊替换（最先）
+    if (title === "歌手" || title.startsWith("歌手·") || title.match(/^歌手\d{4}$/)) {
+        return "我是歌手";
+    }
+
+    // 删除括号及其中内容
+    title = title.replace(/[（(【\[].*?[）)】\]]/g, '');
+
+    // 删除季数、期数、part等
+    const patterns = [
+        /[·\-:]\s*[^·\-:]+季/,                // “·慢享季”
+        /第[^季]*季/,                        // “第X季”
+        /(?:Part|Season|Series)\s*\d+/i,     // “Part 2”
+        /\d{4}/,                             // 年份
+        /(?:\s+|^)\d{1,2}(?:st|nd|rd|th)?(?=\s|$)/i,  // “2nd”
+        /(?<=[^\d\W])\d+\s*$/,               // 数字结尾
+        /[·\-:].*$/,                         // 冒号、点之后内容
+    ];
+    for (let pattern of patterns) {
+        title = title.replace(pattern, '');
+    }
+
+    // 删除结尾修饰词（但不能把整句删了）
+    const tailKeywords = ['前传', '后传', '外传', '番外篇', '番外', '特别篇', '剧场版', 'SP', '最终季', '完结篇', '完结', '电影', 'OVA', '后篇'];
+    for (let kw of tailKeywords) {
+        title = title.replace(new RegExp(`${kw}$`), '');
+    }
+
+    title = title.trim();
+
+    // 对“多个词”的情况，仅保留第一个“主标题”（如“沧元图2 元初山” → “沧元图”）
+    // 使用中文词语边界分割
+    const parts = title.split(/\s+/);
+    if (parts.length > 1) {
+        // 保留第一个部分，剔除数字
+        return parts[0].replace(/\d+$/, '');
+    } else {
+        return title.replace(/\d+$/, '');
+    }
+}
+
 async function fetchImdbItems(scItems) {
   const promises = scItems.map(async (scItem) => {
     // 模拟API请求
     if (!scItem || !scItem.title) {
       return null;
     }
-    let title = scItem.title.replace(/ 第[^季]*季/, '').replace(/歌手\d{4}/, '我是歌手');
+    let title = cleanTitle(scItem.title);
     console.log("title: ", title, " ; type: ", scItem.type);
     const tmdbDatas = await fetchTmdbData(title, scItem.type)
 
@@ -1674,4 +1726,18 @@ async function loadActorItems(params = {}) {
     return doubanIds;
   }
   return [];
+}
+
+// 获取豆瓣首页轮播图
+async function loadCarouselItems(params = {}) {
+    const response = await Widget.http.get(`https://gist.githubusercontent.com/huangxd-/5ae61c105b417218b9e5bad7073d2f36/raw/douban_carousel.json`, {
+        headers: {
+            "User-Agent":
+                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        },
+    });
+
+    console.log("请求结果:", response.data);
+
+    return response.data;
 }

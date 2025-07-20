@@ -110,7 +110,75 @@ done
 
 echo -e "${BLUE}📊 文件处理统计: ${GREEN}$valid_count 个有效${NC}, ${RED}$invalid_count 个无效${NC}"
 
-# 智能去重：优先考虑版本号，其次考虑描述详细程度
+# URL 有效性检查 - 先验证URL再进行去重
+echo -e "${YELLOW}🔍 开始URL有效性检查...${NC}"
+valid_urls=0
+invalid_urls=0
+
+# 创建临时文件存储验证结果
+echo '[]' > "${TEMP_WIDGETS}.validated"
+
+# 根据环境调整验证策略
+if [[ -n "$GITHUB_ACTIONS" ]]; then
+    echo -e "${YELLOW}🤖 GitHub Actions环境 - 使用快速验证模式${NC}"
+    max_retries=1
+    timeout_seconds=5
+else
+    echo -e "${YELLOW}🖥️  本地环境 - 使用标准验证模式${NC}"
+    max_retries=2
+    timeout_seconds=10
+fi
+
+# 逐个检查每个模块的URL
+widget_count=$(jq 'length' "$TEMP_WIDGETS")
+for ((i=0; i<widget_count; i++)); do
+    widget=$(jq -r ".[$i]" "$TEMP_WIDGETS")
+    id=$(echo "$widget" | jq -r '.id')
+    title=$(echo "$widget" | jq -r '.title')
+    url=$(echo "$widget" | jq -r '.url')
+    
+    echo -n "  $id ($title): "
+    
+    # 检查URL有效性，根据环境调整策略
+    retry_count=0
+    url_valid=false
+    
+    while [[ $retry_count -le $max_retries ]] && [[ "$url_valid" == "false" ]]; do
+        if curl -s -I --connect-timeout $timeout_seconds --max-time $timeout_seconds "$url" | head -1 | grep -q "200\|302" 2>/dev/null; then
+            echo -e "${GREEN}✅ 可访问${NC}"
+            echo "$widget" | jq '.' >> "${TEMP_WIDGETS}.validated.tmp"
+            ((valid_urls++))
+            url_valid=true
+        else
+            ((retry_count++))
+            if [[ $retry_count -le $max_retries ]]; then
+                echo -n "重试($retry_count)... "
+                if [[ -n "$GITHUB_ACTIONS" ]]; then
+                    sleep 1  # GitHub Actions中缩短等待时间
+                else
+                    sleep 2
+                fi
+            else
+                echo -e "${RED}❌ 不可访问${NC}"
+                ((invalid_urls++))
+                # URL验证失败的模块一律不保留，确保聚合质量
+            fi
+        fi
+    done
+done
+
+# 重新组装验证通过的模块
+if [ -f "${TEMP_WIDGETS}.validated.tmp" ]; then
+    jq -s '.' "${TEMP_WIDGETS}.validated.tmp" > "${TEMP_WIDGETS}.validated"
+    mv "${TEMP_WIDGETS}.validated" "$TEMP_WIDGETS"
+    rm -f "${TEMP_WIDGETS}.validated.tmp"
+else
+    echo '[]' > "$TEMP_WIDGETS"
+fi
+
+echo -e "${BLUE}📊 URL验证统计: ${GREEN}$valid_urls 个有效${NC}, ${RED}$invalid_urls 个无效${NC}"
+
+# 智能去重：对URL有效的模块进行去重，优先考虑版本号，其次考虑描述详细程度
 echo -e "${YELLOW}🔄 开始智能去重...${NC}"
 before_dedup_count=$(jq 'length' "$TEMP_WIDGETS")
 
@@ -134,67 +202,6 @@ after_dedup_count=$(jq 'length' "$TEMP_WIDGETS")
 removed_count=$((before_dedup_count - after_dedup_count))
 
 echo -e "${BLUE}📊 去重统计: ${YELLOW}$before_dedup_count${NC} → ${GREEN}$after_dedup_count${NC} (移除 ${RED}$removed_count${NC} 个重复)"
-
-# URL 有效性检查 - 对去重后的模块进行验证
-echo -e "${YELLOW}🔍 开始URL有效性检查...${NC}"
-valid_urls=0
-invalid_urls=0
-
-# 检查是否在GitHub Actions环境中运行
-if [[ -n "$GITHUB_ACTIONS" ]]; then
-    echo -e "${YELLOW}⚠️  检测到GitHub Actions环境，跳过URL验证步骤${NC}"
-    # 在GitHub Actions中跳过URL验证，直接使用所有模块
-    valid_urls=$(jq 'length' "$TEMP_WIDGETS")
-    invalid_urls=0
-else
-    # 创建临时文件存储验证结果
-    echo '[]' > "${TEMP_WIDGETS}.validated"
-
-    # 逐个检查每个模块的URL
-    widget_count=$(jq 'length' "$TEMP_WIDGETS")
-    for ((i=0; i<widget_count; i++)); do
-        widget=$(jq -r ".[$i]" "$TEMP_WIDGETS")
-        id=$(echo "$widget" | jq -r '.id')
-        title=$(echo "$widget" | jq -r '.title')
-        url=$(echo "$widget" | jq -r '.url')
-        
-        echo -n "  $id ($title): "
-        
-        # 检查URL有效性，增加重试机制
-        retry_count=0
-        max_retries=2
-        url_valid=false
-        
-        while [[ $retry_count -le $max_retries ]] && [[ "$url_valid" == "false" ]]; do
-            if curl -s -I --connect-timeout 10 --max-time 30 "$url" | head -1 | grep -q "200\|302"; then
-                echo -e "${GREEN}✅ 可访问${NC}"
-                echo "$widget" | jq '.' >> "${TEMP_WIDGETS}.validated.tmp"
-                ((valid_urls++))
-                url_valid=true
-            else
-                ((retry_count++))
-                if [[ $retry_count -le $max_retries ]]; then
-                    echo -n "重试($retry_count)... "
-                    sleep 2
-                else
-                    echo -e "${RED}❌ 不可访问${NC}"
-                    ((invalid_urls++))
-                fi
-            fi
-        done
-    done
-    
-    # 重新组装验证通过的模块
-    if [ -f "${TEMP_WIDGETS}.validated.tmp" ]; then
-        jq -s '.' "${TEMP_WIDGETS}.validated.tmp" > "${TEMP_WIDGETS}.validated"
-        mv "${TEMP_WIDGETS}.validated" "$TEMP_WIDGETS"
-        rm -f "${TEMP_WIDGETS}.validated.tmp"
-    else
-        echo '[]' > "$TEMP_WIDGETS"
-    fi
-fi
-
-echo -e "${BLUE}📊 URL验证统计: ${GREEN}$valid_urls 个有效${NC}, ${RED}$invalid_urls 个无效${NC}"
 
 # 生成最终文件
 final_count=$(jq 'length' "$TEMP_WIDGETS")
