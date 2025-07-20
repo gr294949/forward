@@ -1,6 +1,6 @@
 {
 	"name": "Widgets Collection",
-	"description": "集合聚合",
+	"description": "聚合",
 	"icon": "https://github.com/pack1r/ForwardWidgets/raw/main/icon.png",
 	"widgets": [
 		{
@@ -60,11 +60,11 @@
 		{
 			"id": "jable",
 			"title": "Jable",
-			"description": "获取Jable全站视频",
+			"description": "获取 Jable 视频",
 			"requiredVersion": "0.0.1",
-			"version": "1.0.6",
+			"version": "1.0.8",
 			"author": "nibiru",
-			"url": "https://raw.githubusercontent.com/pack1r/ForwardWidgets/refs/heads/main/widgets/jable.js"
+			"url": "https://raw.githubusercontent.com/quantumultxx/ForwardWidgets/refs/heads/main/Widgets/jable.js"
 		},
 		{
 			"id": "letterboxd",

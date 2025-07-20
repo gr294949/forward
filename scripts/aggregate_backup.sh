@@ -1,0 +1,328 @@
+#!/bin/bash
+
+# Widget汇聚脚本 - 优化版
+# 合并所有.fwd文件中的widgets，智能去重，并验证URL有效性
+
+# 在GitHub Actions中使用更宽松的错误处理
+if [[ -n "$GITHUB_ACTIONS" ]]; then
+    set +e  # 在GitHub Actions中不要在第一个错误时退出
+    echo "🤖 检测到GitHub Actions环境，使用宽松错误处理模式"
+else
+    set -e  # 本地开发时严格错误处理
+fi
+
+# 颜色输出
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# 清理函数
+cleanup() {
+    rm -f "$TEMP_WIDGETS" "$TEMP_WIDGETS.tmp" "$TEMP_WIDGETS.dedup" "$TEMP_WIDGETS.validated" 2>/dev/null || true
+}
+trap cleanup EXIT
+
+# 项目根目录
+PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+WIDGETS_DIR="$PROJECT_ROOT/widgets"
+OUTPUT_FILE="$PROJECT_ROOT/widgets.fwd"
+TEMP_WIDGETS="$PROJECT_ROOT/temp_widgets.json"
+
+echo -e "${BLUE}🔗 开始汇聚Widget模块...${NC}"
+echo -e "${BLUE}📍 工作目录: $PROJECT_ROOT${NC}"
+echo -e "${BLUE}📁 Widgets目录: $WIDGETS_DIR${NC}"
+echo -e "${BLUE}� 输出文件: $OUTPUT_FILE${NC}"
+
+# 确保widgets目录存在
+mkdir -p "$WIDGETS_DIR"
+
+# 初始化空的widgets数组
+if ! echo '[]' > "$TEMP_WIDGETS"; then
+    echo -e "${RED}❌ 无法创建临时文件: $TEMP_WIDGETS${NC}"
+    exit 1
+fi
+
+echo -e "${BLUE}✅ 临时文件已创建: $TEMP_WIDGETS${NC}"
+
+# 检查.fwd文件有效性并合并
+echo -e "${YELLOW}📋 检查并合并.fwd文件...${NC}"
+valid_count=0
+invalid_count=0
+
+for fwd_file in "$WIDGETS_DIR"/*/*.fwd; do
+    [ -f "$fwd_file" ] || continue
+    
+    echo -n "处理: $fwd_file - "
+    
+    # 验证JSON格式
+    if ! jq '.' "$fwd_file" > /dev/null 2>&1; then
+        echo -e "${RED}❌ JSON格式错误${NC}"
+        ((invalid_count++))
+        continue
+    fi
+    
+    # 提取widgets数组
+    widgets_array=$(jq '.widgets // []' "$fwd_file" 2>/dev/null)
+    if [ $? -ne 0 ] || [ -z "$widgets_array" ]; then
+        echo -e "${RED}❌ 提取widgets失败${NC}"
+        widgets_array='[]'
+        ((invalid_count++))
+        continue
+    fi
+    
+    widget_count=$(echo "$widgets_array" | jq 'length' 2>/dev/null || echo "0")
+    
+    if [ "$widget_count" -eq 0 ]; then
+        echo -e "${YELLOW}⚠️ 无有效模块${NC}"
+    else
+        echo -e "${GREEN}✅ $widget_count 个模块${NC}"
+        ((valid_count++))
+    fi
+    
+    # 合并到临时文件
+    echo -n "合并..."
+    if ! jq --argjson new_widgets "$widgets_array" '. + $new_widgets' "$TEMP_WIDGETS" > "${TEMP_WIDGETS}.tmp" 2>/dev/null; then
+        echo -e "${RED}❌ 合并JSON时出错: $fwd_file${NC}"
+        if [[ -n "$GITHUB_ACTIONS" ]]; then
+            echo "⚠️  在GitHub Actions中跳过此文件"
+            ((invalid_count++))
+            continue
+        else
+            echo -e "${RED}📝 widgets_array内容长度: ${#widgets_array}${NC}"
+            exit 1
+        fi
+    fi
+    
+    if ! mv "${TEMP_WIDGETS}.tmp" "$TEMP_WIDGETS" 2>/dev/null; then
+        echo -e "${RED}❌ 移动临时文件失败${NC}"
+        if [[ -n "$GITHUB_ACTIONS" ]]; then
+            echo "⚠️  在GitHub Actions中跳过此文件"
+            ((invalid_count++))
+            continue
+        else
+            exit 1
+        fi
+    fi
+    echo -e "${GREEN} 完成${NC}"
+done
+
+echo -e "${BLUE}📊 文件处理统计: ${GREEN}$valid_count 个有效${NC}, ${RED}$invalid_count 个无效${NC}"
+  if length > 1 then 
+    # 如果有多个相同ID，选择版本最高的
+    # 如果版本相同，选择描述更详细的（长度更长的）
+    sort_by([.version, (.description | length)]) | reverse | .[0]
+  else 
+    .[0] 
+  end
+) | 
+sort_by(.title)
+' "$TEMP_WIDGETS" > "${TEMP_WIDGETS}.dedup"
+mv "${TEMP_WIDGETS}.dedup" "$TEMP_WIDGETS"
+
+after_dedup_count=$(jq 'length' "$TEMP_WIDGETS")
+removed_count=$((before_dedup_count - after_dedup_count))
+
+echo -e "${BLUE}📊 去重统计: ${YELLOW}$before_dedup_count${NC} → ${GREEN}$after_dedup_count${NC} (移除 ${RED}$removed_count${NC} 个重复)"
+
+# URL 有效性检查 - 对去重后的模块进行验证
+echo -e "${YELLOW}🔍 开始URL有效性检查...${NC}"RL 有效性检查 - 先验证再去重
+echo -e "${YELLOW}🔍 开始URL有效性检查...${NC}"UB_ACTIONS" ]]; then
+    set +e  # 在GitHub Actions中不要在第一个错误时退出
+    echo "🤖 检测到GitHub Actions环境，使用宽松错误处理模式"
+else
+    set -e  # 本地开发时严格错误处理
+fi
+
+# 颜色输出
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# 清理函数
+cleanup() {
+    rm -f "$TEMP_WIDGETS" "$TEMP_WIDGETS.tmp" "$TEMP_WIDGETS.dedup" "$TEMP_WIDGETS.validated" 2>/dev/null || true
+}
+trap cleanup EXIT
+
+# 项目根目录
+PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+WIDGETS_DIR="$PROJECT_ROOT/widgets"
+OUTPUT_FILE="$PROJECT_ROOT/widgets.fwd"
+TEMP_WIDGETS="$PROJECT_ROOT/temp_widgets.json"
+
+echo -e "${BLUE}🔗 开始汇聚Widget模块...${NC}"
+echo -e "${BLUE}📍 工作目录: $PROJECT_ROOT${NC}"
+echo -e "${BLUE}📁 Widgets目录: $WIDGETS_DIR${NC}"
+echo -e "${BLUE}📄 输出文件: $OUTPUT_FILE${NC}"
+
+# 确保widgets目录存在
+mkdir -p "$WIDGETS_DIR"
+
+# 初始化空的widgets数组
+if ! echo '[]' > "$TEMP_WIDGETS"; then
+    echo -e "${RED}❌ 无法创建临时文件: $TEMP_WIDGETS${NC}"
+    exit 1
+fi
+
+echo -e "${BLUE}✅ 临时文件已创建: $TEMP_WIDGETS${NC}"
+
+# 检查.fwd文件有效性并合并
+echo -e "${YELLOW}📋 检查并合并.fwd文件...${NC}"
+valid_count=0
+invalid_count=0
+
+for fwd_file in "$WIDGETS_DIR"/*/*.fwd; do
+    [ -f "$fwd_file" ] || continue
+    
+    echo -n "处理: $fwd_file - "
+    
+    # 验证JSON格式
+    if ! jq '.' "$fwd_file" > /dev/null 2>&1; then
+        echo -e "${RED}❌ JSON格式错误${NC}"
+        ((invalid_count++))
+        continue
+    fi
+    
+    # 提取widgets数组
+    widgets_array=$(jq '.widgets // []' "$fwd_file" 2>/dev/null)
+    if [ $? -ne 0 ] || [ -z "$widgets_array" ]; then
+        echo -e "${RED}❌ 提取widgets失败${NC}"
+        widgets_array='[]'
+        ((invalid_count++))
+        continue
+    fi
+    
+    widget_count=$(echo "$widgets_array" | jq 'length' 2>/dev/null || echo "0")
+    
+    if [ "$widget_count" -eq 0 ]; then
+        echo -e "${YELLOW}⚠️ 无有效模块${NC}"
+    else
+        echo -e "${GREEN}✅ $widget_count 个模块${NC}"
+        ((valid_count++))
+    fi
+    
+    # 合并到临时文件
+    echo -n "合并..."
+    if ! jq --argjson new_widgets "$widgets_array" '. + $new_widgets' "$TEMP_WIDGETS" > "${TEMP_WIDGETS}.tmp" 2>/dev/null; then
+        echo -e "${RED}❌ 合并JSON时出错: $fwd_file${NC}"
+        if [[ -n "$GITHUB_ACTIONS" ]]; then
+            echo "⚠️  在GitHub Actions中跳过此文件"
+            ((invalid_count++))
+            continue
+        else
+            echo -e "${RED}📝 widgets_array内容长度: ${#widgets_array}${NC}"
+            exit 1
+        fi
+    fi
+    
+    if ! mv "${TEMP_WIDGETS}.tmp" "$TEMP_WIDGETS" 2>/dev/null; then
+        echo -e "${RED}❌ 移动临时文件失败${NC}"
+        if [[ -n "$GITHUB_ACTIONS" ]]; then
+            echo "⚠️  在GitHub Actions中跳过此文件"
+            ((invalid_count++))
+            continue
+        else
+            exit 1
+        fi
+    fi
+    echo -e "${GREEN} 完成${NC}"
+done
+
+echo -e "${BLUE}📊 文件处理统计: ${GREEN}$valid_count 个有效${NC}, ${RED}$invalid_count 个无效${NC}"
+
+# URL 有效性检查 - 先验证再去重
+echo -e "${YELLOW}� 开始URL有效性检查...${NC}"
+valid_urls=0
+invalid_urls=0
+before_validation_count=$(jq 'length' "$TEMP_WIDGETS")
+
+# 检查是否在GitHub Actions环境中运行
+if [[ -n "$GITHUB_ACTIONS" ]]; then
+    echo -e "${YELLOW}⚠️  检测到GitHub Actions环境，跳过URL验证步骤${NC}"
+    # 在GitHub Actions中跳过URL验证，直接使用所有模块
+    cp "$TEMP_WIDGETS" "${TEMP_WIDGETS}.validated"
+    valid_urls=$(jq 'length' "$TEMP_WIDGETS")
+    invalid_urls=0
+else
+    # 创建临时文件存储验证结果
+    echo '[]' > "${TEMP_WIDGETS}.validated"
+
+    # 逐个检查每个模块的URL
+    widget_count=$(jq 'length' "$TEMP_WIDGETS")
+    for ((i=0; i<widget_count; i++)); do
+        widget=$(jq -r ".[$i]" "$TEMP_WIDGETS")
+        id=$(echo "$widget" | jq -r '.id')
+        title=$(echo "$widget" | jq -r '.title')
+        url=$(echo "$widget" | jq -r '.url')
+        
+        echo -n "  $id ($title): "
+        
+        # 检查URL有效性，增加重试机制
+        retry_count=0
+        max_retries=2
+        url_valid=false
+        
+        while [[ $retry_count -le $max_retries ]] && [[ "$url_valid" == "false" ]]; do
+            if curl -s -I --connect-timeout 10 --max-time 30 "$url" | head -1 | grep -q "200\|302"; then
+                echo -e "${GREEN}✅ 可访问${NC}"
+                echo "$widget" | jq '.' >> "${TEMP_WIDGETS}.validated.tmp"
+                ((valid_urls++))
+                url_valid=true
+            else
+                ((retry_count++))
+                if [[ $retry_count -le $max_retries ]]; then
+                    echo -n "重试($retry_count)... "
+                    sleep 2
+                else
+                    echo -e "${RED}❌ 不可访问${NC}"
+                    ((invalid_urls++))
+                fi
+            fi
+        done
+    done
+    
+    # 重新组装验证通过的模块
+    if [ -f "${TEMP_WIDGETS}.validated.tmp" ]; then
+        jq -s '.' "${TEMP_WIDGETS}.validated.tmp" > "${TEMP_WIDGETS}.validated"
+        rm -f "${TEMP_WIDGETS}.validated.tmp"
+    else
+        echo '[]' > "${TEMP_WIDGETS}.validated"
+    fi
+fi
+
+# 将验证通过的模块复制到主文件
+mv "${TEMP_WIDGETS}.validated" "$TEMP_WIDGETS"
+
+echo -e "${BLUE}📊 URL验证统计: ${GREEN}$valid_urls 个有效${NC}, ${RED}$invalid_urls 个无效${NC}"
+
+# 生成最终文件
+final_count=$(jq 'length' "$TEMP_WIDGETS")
+echo -e "${YELLOW}📝 生成最终文件: $final_count 个模块${NC}"
+
+# 生成最终输出文件
+jq --tab '{
+  "name": "Widgets Collection",
+  "description": "聚合",
+  "icon": "https://github.com/pack1r/ForwardWidgets/raw/main/icon.png",
+  "widgets": .
+}' "$TEMP_WIDGETS" > "$OUTPUT_FILE"
+
+echo -e "${GREEN}✅ 汇聚完成！${NC}"
+echo -e "${BLUE}📄 输出文件: $OUTPUT_FILE${NC}"
+echo -e "${BLUE}📊 最终统计: $final_count 个有效模块${NC}"
+
+# 显示按仓库分组的统计
+echo -e "\n${YELLOW}📈 按仓库分组统计:${NC}"
+jq -r '.[] | .id' "$TEMP_WIDGETS" | sed 's/.*\///' | sort | uniq -c | sort -nr | while read count id; do
+    echo -e "  ${GREEN}$count${NC} 个模块: $id"
+done
+
+# 显示简要模块列表
+echo -e "\n${YELLOW}📋 模块列表:${NC}"
+jq -r '.[] | "  • \(.title) (\(.id))"' "$TEMP_WIDGETS" | sort
+
+echo -e "\n${GREEN}🎉 汇聚脚本执行完成！${NC}"
