@@ -110,17 +110,40 @@ done
 
 echo -e "${BLUE}📊 文件处理统计: ${GREEN}$valid_count 个有效${NC}, ${RED}$invalid_count 个无效${NC}"
 
-# URL 有效性检查 - 先验证再去重
-echo -e "${YELLOW}� 开始URL有效性检查...${NC}"
+# 智能去重：优先考虑版本号，其次考虑描述详细程度
+echo -e "${YELLOW}🔄 开始智能去重...${NC}"
+before_dedup_count=$(jq 'length' "$TEMP_WIDGETS")
+
+jq '
+# 根据ID分组
+group_by(.id) | 
+map(
+  if length > 1 then 
+    # 如果有多个相同ID，选择版本最高的
+    # 如果版本相同，选择描述更详细的（长度更长的）
+    sort_by([.version, (.description | length)]) | reverse | .[0]
+  else 
+    .[0] 
+  end
+) | 
+sort_by(.title)
+' "$TEMP_WIDGETS" > "${TEMP_WIDGETS}.dedup"
+mv "${TEMP_WIDGETS}.dedup" "$TEMP_WIDGETS"
+
+after_dedup_count=$(jq 'length' "$TEMP_WIDGETS")
+removed_count=$((before_dedup_count - after_dedup_count))
+
+echo -e "${BLUE}📊 去重统计: ${YELLOW}$before_dedup_count${NC} → ${GREEN}$after_dedup_count${NC} (移除 ${RED}$removed_count${NC} 个重复)"
+
+# URL 有效性检查 - 对去重后的模块进行验证
+echo -e "${YELLOW}🔍 开始URL有效性检查...${NC}"
 valid_urls=0
 invalid_urls=0
-before_validation_count=$(jq 'length' "$TEMP_WIDGETS")
 
 # 检查是否在GitHub Actions环境中运行
 if [[ -n "$GITHUB_ACTIONS" ]]; then
     echo -e "${YELLOW}⚠️  检测到GitHub Actions环境，跳过URL验证步骤${NC}"
     # 在GitHub Actions中跳过URL验证，直接使用所有模块
-    cp "$TEMP_WIDGETS" "${TEMP_WIDGETS}.validated"
     valid_urls=$(jq 'length' "$TEMP_WIDGETS")
     invalid_urls=0
 else
@@ -164,41 +187,14 @@ else
     # 重新组装验证通过的模块
     if [ -f "${TEMP_WIDGETS}.validated.tmp" ]; then
         jq -s '.' "${TEMP_WIDGETS}.validated.tmp" > "${TEMP_WIDGETS}.validated"
+        mv "${TEMP_WIDGETS}.validated" "$TEMP_WIDGETS"
         rm -f "${TEMP_WIDGETS}.validated.tmp"
     else
-        echo '[]' > "${TEMP_WIDGETS}.validated"
+        echo '[]' > "$TEMP_WIDGETS"
     fi
 fi
 
-# 将验证通过的模块复制到主文件
-mv "${TEMP_WIDGETS}.validated" "$TEMP_WIDGETS"
-
 echo -e "${BLUE}📊 URL验证统计: ${GREEN}$valid_urls 个有效${NC}, ${RED}$invalid_urls 个无效${NC}"
-
-# 智能去重：优先考虑版本号，其次考虑描述详细程度
-echo -e "${YELLOW}🔄 开始智能去重...${NC}"
-before_dedup_count=$(jq 'length' "$TEMP_WIDGETS")
-
-jq '
-# 根据ID分组
-group_by(.id) | 
-map(
-  if length > 1 then 
-    # 如果有多个相同ID，选择版本最高的
-    # 如果版本相同，选择描述更详细的（长度更长的）
-    sort_by([.version, (.description | length)]) | reverse | .[0]
-  else 
-    .[0] 
-  end
-) | 
-sort_by(.title)
-' "$TEMP_WIDGETS" > "${TEMP_WIDGETS}.dedup"
-mv "${TEMP_WIDGETS}.dedup" "$TEMP_WIDGETS"
-
-after_dedup_count=$(jq 'length' "$TEMP_WIDGETS")
-removed_count=$((before_dedup_count - after_dedup_count))
-
-echo -e "${BLUE}📊 去重统计: ${YELLOW}$before_dedup_count${NC} → ${GREEN}$after_dedup_count${NC} (移除 ${RED}$removed_count${NC} 个重复)"
 
 # 生成最终文件
 final_count=$(jq 'length' "$TEMP_WIDGETS")
