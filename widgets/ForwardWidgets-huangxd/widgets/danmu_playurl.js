@@ -15,7 +15,7 @@
 WidgetMetadata = {
   id: "forward.playurl.danmu",
   title: "播放链接弹幕",
-  version: "1.0.0",
+  version: "1.0.1",
   requiredVersion: "0.0.2",
   description: "从指定播放链接和服务器获取弹幕【五折码：CHEAP.5;七折码：CHEAP】",
   author: "huangxd_",
@@ -29,6 +29,22 @@ WidgetMetadata = {
         {
           title: "lyz05",
           value: "https://fc.lyz05.cn",
+        },
+        {
+          title: "56uxi",
+          value: "https://danmu.56uxi.com",
+        },
+        {
+          title: "hls",
+          value: "https://dmku.hls.one",
+        },
+        {
+          title: "icu",
+          value: "https://api.danmu.icu",
+        },
+        {
+          title: "678",
+          value: "https://se.678.ooo",
         },
       ],
     },
@@ -114,7 +130,7 @@ async function getCommentsById(params) {
   const { danmu_server, commentId, link, videoUrl, season, episode, tmdbId, type, title } = params;
 
   const response = await Widget.http.get(
-    `${danmu_server}/?url=${title}`,
+    `${danmu_server}/?url=${title}&ac=dm`,
     {
       headers: {
         "Content-Type": "application/xml",
