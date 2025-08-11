@@ -247,11 +247,18 @@ PlutoTV-美国 (United States)
 年代：所有年代/2020年代/2010年代/2000年代/1990年代/1980年代/1970年代/1960年代/1950年代/1940年代/1930年代/1920年代/1910年代/1900年代/1890年代/1880年代/1870年代
 ```
 
-### 九、播放链接弹幕
+### 九、手动链接弹幕
 <img src="https://i.mji.rip/2025/08/09/0034f3549373679f895b69e4f29d6293.jpeg" style="width:400px" />
 
 #### 自定义服务器
 从哪个服务器获取弹幕，默认是https://fc.lyz05.cn
+```shell
+https://fc.lyz05.cn
+https://danmu.56uxi.com
+https://dmku.hls.one
+https://api.danmu.icu
+https://se.678.ooo
+```
 
 #### 各大平台播放链接输入示例
 ```shell
@@ -262,6 +269,28 @@ https://v.youku.com/v_show/id_XNTE5NjUxNjUyOA==.html
 https://www.iqiyi.com/v_bb6gsxzz78.html
 https://ani.gamer.com.tw/animeVideo.php?sn=41645
 ```
+
+### 十、自动链接弹幕
+<img src="https://i.mji.rip/2025/08/10/dac88bcdb1f00111db3e5163de3fc550.jpeg" style="width:400px" />
+
+会自动获取平台播放链接并根据链接下载弹幕（目前主要适配了电视剧和电影）
+实在自动获取不到的就蒜鸟，手动也不是不可以，或者反馈下我tg机器人 https://t.me/ddjdd_bot
+
+#### 自定义服务器
+从哪个服务器获取弹幕，默认是https://fc.lyz05.cn
+```shell
+https://fc.lyz05.cn
+https://danmu.56uxi.com
+https://dmku.hls.one
+https://api.danmu.icu
+https://se.678.ooo
+```
+
+#### 电影弹幕优先平台
+新增电影弹幕优先平台，用于控制从哪个平台下载电影弹幕，默认随机，且如果指定的平台在返回数据中不存在，则随机
+
+#### debug开关
+新增debug开关，默认关闭，打开的状态下会在开头2分钟内打印错误日志弹幕
 
 ### 各插件刷新时间列表
 ```shell

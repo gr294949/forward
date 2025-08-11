@@ -14,12 +14,12 @@
  */
 WidgetMetadata = {
   id: "forward.playurl.danmu",
-  title: "播放链接弹幕",
-  version: "1.0.1",
+  title: "手动链接弹幕",
+  version: "1.0.2",
   requiredVersion: "0.0.2",
   description: "从指定播放链接和服务器获取弹幕【五折码：CHEAP.5;七折码：CHEAP】",
-  author: "huangxd_",
-  site: "https://github.com/huangxd_/ForwardWidgets",
+  author: "huangxd",
+  site: "https://github.com/huangxd-/ForwardWidgets",
   globalParams: [
     {
       name: "danmu_server",
@@ -68,6 +68,23 @@ WidgetMetadata = {
     },
   ],
 };
+
+function printFirst200Chars(data) {
+  let dataToPrint;
+
+  if (typeof data === 'string') {
+    dataToPrint = data;  // 如果是字符串，直接使用
+  } else if (Array.isArray(data)) {
+    dataToPrint = JSON.stringify(data);  // 如果是数组，转为字符串
+  } else if (typeof data === 'object') {
+    dataToPrint = JSON.stringify(data);  // 如果是对象，转为字符串
+  } else {
+    console.error("Unsupported data type");
+    return;
+  }
+
+  console.log(dataToPrint.slice(0, 200));  // 打印前200个字符
+}
 
 async function searchDanmu(params) {
   const { tmdbId, type, title, season, link, videoUrl, danmu_server } = params;
@@ -133,8 +150,8 @@ async function getCommentsById(params) {
     `${danmu_server}/?url=${title}&ac=dm`,
     {
       headers: {
-        "Content-Type": "application/xml",
-        "User-Agent": "ForwardWidgets/1.0.0",
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
       },
     }
   );
@@ -143,14 +160,14 @@ async function getCommentsById(params) {
   //   `${danmu_server}/?url=https://v.qq.com/x/cover/53q0eh78q97e4d1/x00174aq5no.html`,
   //   {
   //     headers: {
-  //       "Content-Type": "application/xml",
+  //       "Content-Type": "application/json",
   //       "User-Agent": "ForwardWidgets/1.0.0",
   //     },
   //   }
   // );
 
-  console.log(response.data);
+  console.log("danmu response:", printFirst200Chars(response.data));
   // const result = parseDanmakuXML(response.data);
-  // console.log(result);
+  // console.log("danmu json response:", printFirst200Chars(result));
   return response.data;
 }
