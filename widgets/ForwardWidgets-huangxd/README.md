@@ -271,10 +271,13 @@ https://ani.gamer.com.tw/animeVideo.php?sn=41645
 ```
 
 ### 十、自动链接弹幕
-<img src="https://i.mji.rip/2025/08/10/dac88bcdb1f00111db3e5163de3fc550.jpeg" style="width:400px" />
+<img src="https://i.mji.rip/2025/08/10/dac88bcdb1f00111db3e5163de3fc550.jpeg" style="width:400px" /><img src="https://i.mji.rip/2025/08/12/bdf3b7637bdcf2c0a1f56b352e453f24.jpeg" style="width:400px" />
 
-会自动获取平台播放链接并根据链接下载弹幕（目前主要适配了电视剧和电影）
+会自动获取平台播放链接并根据链接下载弹幕（目前主要适配了电视剧和电影以及综艺）
+
 实在自动获取不到的就蒜鸟，手动也不是不可以，或者反馈下我tg机器人 https://t.me/ddjdd_bot
+
+综艺是根据集发布日期和集标题匹配的播放链接，所以如果emby刮削不准确或者360kan平台没有该综艺都会匹配不到
 
 #### 自定义服务器
 从哪个服务器获取弹幕，默认是https://fc.lyz05.cn
