@@ -269,6 +269,14 @@ https://v.youku.com/v_show/id_XNTE5NjUxNjUyOA==.html
 https://www.iqiyi.com/v_bb6gsxzz78.html
 https://ani.gamer.com.tw/animeVideo.php?sn=41645
 ```
+目前已兼容手机端网页url
+```shell
+https://www.bilibili.com/bangumi/play/ep1231564
+https://m.mgtv.com/b/771610/23300622.html
+https://m.v.qq.com/x/m/play?cid=53q0eh78q97e4d1&vid=x00174aq5no
+https://m.youku.com/alipay_video/id_cbff0b0703e54d659628.html
+https://m.iqiyi.com/v_1ftv9n1m3bg.html
+```
 
 ### 十、自动链接弹幕
 <img src="https://i.mji.rip/2025/08/10/dac88bcdb1f00111db3e5163de3fc550.jpeg" style="width:400px" /><img src="https://i.mji.rip/2025/08/12/bdf3b7637bdcf2c0a1f56b352e453f24.jpeg" style="width:400px" />
