@@ -250,6 +250,8 @@ PlutoTV-美国 (United States)
 ### 九、手动链接弹幕
 <img src="https://i.mji.rip/2025/08/09/0034f3549373679f895b69e4f29d6293.jpeg" style="width:400px" />
 
+使用方法请前往 https://t.me/ForwardWidgets/288 观看
+
 #### 自定义服务器
 从哪个服务器获取弹幕，默认是https://fc.lyz05.cn
 ```shell
@@ -271,7 +273,7 @@ https://ani.gamer.com.tw/animeVideo.php?sn=41645
 ```
 目前已兼容手机端网页url
 ```shell
-https://www.bilibili.com/bangumi/play/ep1231564
+https://m.bilibili.com/bangumi/play/ep1231564
 https://m.mgtv.com/b/771610/23300622.html
 https://m.v.qq.com/x/m/play?cid=53q0eh78q97e4d1&vid=x00174aq5no
 https://m.youku.com/alipay_video/id_cbff0b0703e54d659628.html
@@ -287,7 +289,7 @@ https://m.iqiyi.com/v_1ftv9n1m3bg.html
 
 综艺是根据集发布日期和集标题匹配的播放链接，所以如果emby刮削不准确或者360kan平台没有该综艺都会匹配不到
 
-#### 自定义服务器
+#### 自定义弹幕服务器
 从哪个服务器获取弹幕，默认是https://fc.lyz05.cn
 ```shell
 https://fc.lyz05.cn
@@ -297,11 +299,17 @@ https://api.danmu.icu
 https://se.678.ooo
 ```
 
+#### 弹幕服务器轮询开关
+设置的弹幕服务器下载弹幕失败的情况下轮询其他弹幕服务器
+
 #### 电影弹幕优先平台
 新增电影弹幕优先平台，用于控制从哪个平台下载电影弹幕，默认随机，且如果指定的平台在返回数据中不存在，则随机
 
-#### vod站点
+#### vod采集站点
 从vod站点拿播放信息用于补充360kan缺失影片的问题
+
+#### vod采集站点轮询开关
+设置的vod站点搜索信息失败的情况下轮询其他剩余站点
 
 #### debug开关
 新增debug开关，默认关闭，打开的状态下会在开头2分钟内打印错误日志弹幕
