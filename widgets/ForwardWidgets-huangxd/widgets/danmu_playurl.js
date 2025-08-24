@@ -50,6 +50,10 @@ WidgetMetadata = {
           title: "56uxi",
           value: "https://danmu.56uxi.com",
         },
+        {
+          title: "lxlad",
+          value: "https://dm.lxlad.com",
+        },
       ],
     },
   ],
@@ -1250,6 +1254,7 @@ async function getCommentsById(params) {
         "https://api.danmu.icu",
         "https://se.678.ooo",
         "https://danmu.56uxi.com",
+        "https://dm.lxlad.com",
     ];
 
     // 统一的请求函数

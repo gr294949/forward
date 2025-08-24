@@ -597,7 +597,7 @@ WidgetMetadata = {
             ],
         },
     ],
-    version: "1.0.0",
+    version: "1.0.1",
     requiredVersion: "0.0.1",
     description: "解析Letterboxd片单内的影片【五折码：CHEAP.5;七折码：CHEAP】",
     author: "huangxd",
@@ -610,7 +610,7 @@ function extractLetterboxdUrlsFromResponse(responseData, minNum, maxNum) {
 
     // 定位所有包含data-target-link属性的影片容器div
     // 选择器匹配：li.poster-container 下的 div.film-poster（包含data-target-link属性）
-    let filmContainers = $('li.poster-container div.film-poster[data-target-link]');
+    let filmContainers = $('li.posteritem div.react-component[data-target-link]');
 
     if (!filmContainers.length) {
         throw new Error("未找到包含data-target-link属性的电影容器");

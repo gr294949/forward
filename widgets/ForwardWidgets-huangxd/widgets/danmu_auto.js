@@ -15,7 +15,7 @@
 WidgetMetadata = {
   id: "forward.auto.danmu",
   title: "自动链接弹幕",
-  version: "1.0.12",
+  version: "1.0.14",
   requiredVersion: "0.0.2",
   description: "自动获取播放链接并从服务器获取弹幕【五折码：CHEAP.5;七折码：CHEAP】",
   author: "huangxd",
@@ -49,6 +49,10 @@ WidgetMetadata = {
         {
           title: "56uxi",
           value: "https://danmu.56uxi.com",
+        },
+        {
+          title: "lxlad",
+          value: "https://dm.lxlad.com",
         },
       ],
     },
@@ -142,6 +146,47 @@ WidgetMetadata = {
     {
       name: "debug",
       title: "调试日志，是否开启前2分钟投放弹幕日志",
+      type: "enumeration",
+      value: "false",
+      enumOptions: [
+        {
+            title: "关",
+            value: "false",
+        },
+        {
+            title: "开",
+            value: "true",
+        },
+      ],
+    },
+    {
+      name: "danmu_api_1",
+      title: "danmu_api_1 (前面匹配不到的可以试试弹幕API，比如一些韩剧/美剧)",
+      type: "input",
+    },
+    {
+      name: "danmu_api_2",
+      title: "danmu_api_2 (前面匹配不到的可以试试弹幕API，比如一些韩剧/美剧)",
+      type: "input",
+    },
+    {
+      name: "danmu_api_3",
+      title: "danmu_api_3 (前面匹配不到的可以试试弹幕API，比如一些韩剧/美剧)",
+      type: "input",
+    },
+    {
+      name: "danmu_api_4",
+      title: "danmu_api_4 (前面匹配不到的可以试试弹幕API，比如一些韩剧/美剧)",
+      type: "input",
+    },
+    {
+      name: "danmu_api_5",
+      title: "danmu_api_5 (前面匹配不到的可以试试弹幕API，比如一些韩剧/美剧)",
+      type: "input",
+    },
+    {
+      name: "api_priority",
+      title: "弹幕API优先 (开启后准确性可能没有通过链接匹配的高)",
       type: "enumeration",
       value: "false",
       enumOptions: [
@@ -1502,6 +1547,7 @@ async function getDanmuFromUrl(danmu_server, playUrl, debug, danmu_server_pollin
         "https://api.danmu.icu",
         "https://se.678.ooo",
         "https://danmu.56uxi.com",
+        "https://dm.lxlad.com",
     ];
 
     // 统一的请求函数
@@ -1556,7 +1602,8 @@ async function getDanmuFromUrl(danmu_server, playUrl, debug, danmu_server_pollin
 
 async function getCommentsById(params) {
   const { danmu_server, danmu_server_polling, platform, vod_site, vod_site_polling, debug, commentId, seriesName,
-      episodeName, airDate, runtime, premiereDate, link, videoUrl, season, episode, tmdbId, type, title } = params;
+      episodeName, airDate, runtime, premiereDate, link, videoUrl, season, episode, tmdbId, type, title,
+    danmu_api_1, danmu_api_2, danmu_api_3, danmu_api_4, danmu_api_5, api_priority } = params;
 
   // 测试参数值
   // return printParams(seriesName, episodeName, airDate, runtime, premiereDate, season, episode, tmdbId);
@@ -1571,6 +1618,14 @@ async function getCommentsById(params) {
 
   const tmdbInfo = await fetchTmdbData(tmdbId, type);
 
+  if (api_priority === "true") {
+      const result = await getDanmuFromAPI(title, tmdbInfo, type, season, episode, episodeName, airDate,
+          danmu_api_1, danmu_api_2, danmu_api_3, danmu_api_4, danmu_api_5);
+      if (result) {
+        return result;
+      }
+  }
+
   const animes = await getPlayurls(title, tmdbInfo, type, season);
   console.log("animes.length:", animes.length);
 
@@ -1578,6 +1633,13 @@ async function getCommentsById(params) {
     playUrl = await getPlayurlFromVod(title, tmdbInfo, type, season, episode, episodeName, airDate, platform, vod_site, vod_site_polling);
     if (playUrl) {
         return await getDanmuFromUrl(danmu_server, playUrl, debug, danmu_server_polling);
+    }
+    if (!playUrl && api_priority === "false") {
+        const result = await getDanmuFromAPI(title, tmdbInfo, type, season, episode, episodeName, airDate,
+            danmu_api_1, danmu_api_2, danmu_api_3, danmu_api_4, danmu_api_5);
+        if (result) {
+          return result;
+        }
     }
     if (!playUrl) {
         const count = debug === "true" ? 24 : 1;
@@ -1971,4 +2033,155 @@ function parseDanmuku(responseData) {
     console.error('解析弹幕失败:', error);
     return 0;
   }
+}
+
+async function getDanmuFromAPI(title, tmdbInfo, type, season, episode, episodeName, airDate,
+                               danmu_api_1, danmu_api_2, danmu_api_3, danmu_api_4, danmu_api_5) {
+  const danmu_apis = [danmu_api_1, danmu_api_2, danmu_api_3, danmu_api_4, danmu_api_5];
+  let queryTitle = title;
+
+  for (let danmu_api of danmu_apis) {
+    if (!danmu_api) {
+      continue
+    }
+    // 搜索title
+    let response;
+    try {
+      response = await Widget.http.get(
+        `${danmu_api}/api/v2/search/anime?keyword=${queryTitle}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+          },
+        }
+      );
+    } catch (error) {
+      console.error('API调用失败:', error);
+      continue;
+    }
+
+    if (!response) {
+      console.error("获取数据失败");
+      continue;
+    }
+
+    const data = response.data;
+
+    // 检查API返回状态
+    if (!data.success) {
+      console.error(data.errorMessage || "API调用失败");
+      continue;
+    }
+
+    // 开始过滤数据
+    let animes = [];
+    if (data.animes && data.animes.length > 0) {
+      animes = data.animes.filter((anime) => {
+        if (
+          (anime.type === "tvseries" || anime.type === "web") &&
+          type === "tv"
+        ) {
+          return true;
+        } else if (anime.type === "movie" && type === "movie") {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      if (season) {
+        // filter season
+        const matchedAnimes = animes.filter((anime) => {
+          if (anime.animeTitle.includes(queryTitle)) {
+            // use space to split animeTitle
+            let titleParts = anime.animeTitle.split(" ");
+            if (titleParts.length > 1) {
+              let seasonPart = titleParts[1];
+              // match number from seasonPart
+              let seasonIndex = seasonPart.match(/\d+/);
+              if (seasonIndex && seasonIndex[0] === season) {
+                return true;
+              }
+              // match chinese number
+              let chineseNumber = seasonPart.match(/[一二三四五六七八九十壹贰叁肆伍陆柒捌玖拾]+/);
+              if (chineseNumber && convertChineseNumber(chineseNumber[0]) === season) {
+                return true;
+              }
+            }
+            return false;
+          } else {
+            return false;
+          }
+        });
+        if (matchedAnimes.length > 0) {
+          animes = matchedAnimes;
+        }
+        console.log(animes);
+      }
+    }
+
+    if (animes.length === 0) {
+      continue;
+    }
+
+    const animeId = animes[0].bangumiId;
+
+    // 查询集数
+    const response_detail = await Widget.http.get(
+      `${danmu_api}/api/v2/bangumi/${animeId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        },
+      }
+    );
+
+    if (!response_detail) {
+      console.error("获取数据失败");
+      continue;
+    }
+
+    let commentId;
+
+    if (type === "movie") {
+        commentId = response_detail.data.bangumi.episodes[0].episodeId;
+    } else {
+        const episodeList = response_detail.data.bangumi.episodes;
+        if (tmdbInfo.type !== "Reality") {
+            if (episode - 1 >= 0 && episode - 1 < episodeList.length) {
+                commentId = episodeList[episode - 1].episodeId;
+            }
+        } else {
+            for (const episodeInfo of episodeList) {
+                console.log("episodeTitle: ", episodeInfo.episodeTitle);
+                if (episodeInfo.episodeTitle === episodeName || episodeName.includes(episodeInfo.episodeTitle)) {
+                    commentId = episodeInfo.episodeId;
+                    break;
+                }
+            }
+        }
+    }
+
+    // 获取弹幕
+    if (commentId) {
+      // 调用弹弹play弹幕API - 使用Widget.http.get
+      const response_danmu = await Widget.http.get(
+        `${danmu_api}/api/v2/comment/${commentId}?withRelated=true&chConvert=1`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+          },
+        }
+      );
+
+      if (!response_danmu) {
+        console.error("获取数据失败");
+        continue;
+      }
+      return response_danmu.data;
+    }
+  }
+  return null;
 }
