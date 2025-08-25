@@ -10,6 +10,8 @@
 
 以下插件纯属个人爱好，侵删谢谢。
 
+纯为爱发电，模块只是自己要用，然后顺便分享，如果真要打赏，可以支付宝发口令红包到我的tg私信机器人 https://t.me/ddjdd_bot ，感谢😊
+
 ### 一、豆瓣我看&豆瓣个性化推荐
 
 <img src="https://i.miji.bid/2025/05/05/ee9c89a97e226fa0cebaae2990b13836.jpeg" style="width:200px" /><img src="https://i.miji.bid/2025/05/05/d1b4ddc054156a87ccd1a4bff8197b53.jpeg" style="width:200px" /><img src="https://i.miji.bid/2025/05/05/ffee8bded4b121831d1b8da95c047bb9.jpeg" style="width:200px" /><img src="https://i.miji.bid/2025/05/05/ad56685688d7cd354b6cfcbed97b3e09.jpeg" style="width:200px" />
