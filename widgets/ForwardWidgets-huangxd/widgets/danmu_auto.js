@@ -15,7 +15,7 @@
 WidgetMetadata = {
   id: "forward.auto.danmu",
   title: "自动链接弹幕",
-  version: "1.0.14",
+  version: "1.0.16",
   requiredVersion: "0.0.2",
   description: "自动获取播放链接并从服务器获取弹幕【五折码：CHEAP.5;七折码：CHEAP】",
   author: "huangxd",
@@ -1296,6 +1296,7 @@ async function getPlayurls(title, tmdbInfo, type, season) {
         "Content-Type": "application/json",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
       },
+      timeout: 15,
     }
   );
 
@@ -1596,6 +1597,7 @@ async function getDanmuFromUrl(danmu_server, playUrl, debug, danmu_server_pollin
                         "Content-Type": "application/json",
                         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
                     },
+                    timeout: 15,
                 }
             );
 
@@ -1688,6 +1690,13 @@ async function getCommentsById(params) {
             if (playUrl) {
                 return await getDanmuFromUrl(danmu_server, playUrl, debug, danmu_server_polling);
             }
+            if (!playUrl && api_priority === "false") {
+                const result = await getDanmuFromAPI(title, tmdbInfo, type, season, episode, episodeName, airDate,
+                    danmu_api_1, danmu_api_2, danmu_api_3, danmu_api_4, danmu_api_5);
+                if (result) {
+                  return result;
+                }
+            }
             if (!playUrl) {
                 const count = debug === "true" ? 24 : 1;
                 return generateDanmaku("【自动链接弹幕】：没有找到该集弹幕", count);
@@ -1714,6 +1723,13 @@ async function getCommentsById(params) {
           if (playUrl) {
               return await getDanmuFromUrl(danmu_server, playUrl, debug, danmu_server_polling);
           }
+          if (!playUrl && api_priority === "false") {
+              const result = await getDanmuFromAPI(title, tmdbInfo, type, season, episode, episodeName, airDate,
+                  danmu_api_1, danmu_api_2, danmu_api_3, danmu_api_4, danmu_api_5);
+              if (result) {
+                return result;
+              }
+          }
           if (!playUrl) {
               const count = debug === "true" ? 24 : 1;
               return generateDanmaku("【自动链接弹幕】：该集综艺没有集标题，匹配不了", count);
@@ -1738,6 +1754,7 @@ async function getCommentsById(params) {
                                     "Content-Type": "application/json",
                                     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
                                 },
+                                timeout: 15,
                             }
                         );
 
@@ -1791,6 +1808,13 @@ async function getCommentsById(params) {
       playUrl = await getPlayurlFromVod(title, tmdbInfo, type, season, episode, episodeName, airDate, platform, vod_site, vod_site_polling);
       if (playUrl) {
           return await getDanmuFromUrl(danmu_server, playUrl, debug, danmu_server_polling);
+      }
+        if (!playUrl && api_priority === "false") {
+          const result = await getDanmuFromAPI(title, tmdbInfo, type, season, episode, episodeName, airDate,
+              danmu_api_1, danmu_api_2, danmu_api_3, danmu_api_4, danmu_api_5);
+          if (result) {
+            return result;
+          }
       }
       if (!playUrl) {
           const count = debug === "true" ? 24 : 1;
@@ -1846,6 +1870,7 @@ async function getPlayurlFromVod(title, tmdbInfo, type, season, episode, episode
               "Content-Type": "application/json",
               "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
             },
+            timeout: 15,
           }
         );
         // 检查 response.data.list 是否存在且长度大于 0
@@ -2084,6 +2109,7 @@ async function getDanmuFromAPI(title, tmdbInfo, type, season, episode, episodeNa
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
           },
+          timeout: 15,
         }
       );
     } catch (error) {
@@ -2164,6 +2190,7 @@ async function getDanmuFromAPI(title, tmdbInfo, type, season, episode, episodeNa
           "Content-Type": "application/json",
           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
         },
+        timeout: 15,
       }
     );
 
@@ -2203,6 +2230,7 @@ async function getDanmuFromAPI(title, tmdbInfo, type, season, episode, episodeNa
             "Content-Type": "application/json",
             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
           },
+          timeout: 15,
         }
       );
 
