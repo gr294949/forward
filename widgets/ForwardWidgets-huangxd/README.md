@@ -251,7 +251,7 @@ PlutoTV-美国 (United States)
 年代：所有年代/2020年代/2010年代/2000年代/1990年代/1980年代/1970年代/1960年代/1950年代/1940年代/1930年代/1920年代/1910年代/1900年代/1890年代/1880年代/1870年代
 ```
 
-### 九、手动链接弹幕
+### 九、手动链接弹幕（已合并到自动链接弹幕）
 <img src="https://i.mji.rip/2025/08/09/0034f3549373679f895b69e4f29d6293.jpeg" style="width:400px" />
 
 使用方法请前往 https://t.me/ForwardWidgets/288 观看
@@ -270,7 +270,7 @@ https://dm.lxlad.com
 
 弹幕服务器新增localhost http://127.0.0.1 ，弹幕下载会直接请求各平台（搬迁修改自 https://github.com/lyz05/danmaku ），支持爱优腾芒哔，相对原来直接请求三方弹幕服务器会相对更稳定一点
 
-其中爱平台下载弹幕的时候需要zlib解压，fw的widget.http.get不支持返回arrayBuffer，没找到好的解决办法，所以当前先用cloudflare转了一下，worker.js如下：
+~~其中爱平台下载弹幕的时候需要zlib解压，fw的widget.http.get不支持返回arrayBuffer，没找到好的解决办法，所以当前先用cloudflare转了一下，worker.js如下~~：
 ```js
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request));
@@ -380,7 +380,7 @@ https://se.678.ooo
 https://dm.lxlad.com
 ```
 
-弹幕服务器新增localhost http://127.0.0.1 ，弹幕下载会直接请求各平台（搬迁修改自 https://github.com/lyz05/danmaku ），支持爱优腾芒哔，相对原来直接请求三方弹幕服务器会相对更稳定一点
+弹幕服务器新增localhost http://127.0.0.1 ，弹幕下载会直接请求各平台（搬迁修改自 https://github.com/lyz05/danmaku ），支持爱优腾芒哔，外加人人，相对原来直接请求三方弹幕服务器会相对更稳定一点
 
 其中爱平台下载弹幕的时候需要zlib解压，fw的widget.http.get不支持返回arrayBuffer，没找到好的解决办法，所以当前先用cloudflare转了一下
 
