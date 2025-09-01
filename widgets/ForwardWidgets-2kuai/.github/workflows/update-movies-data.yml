@@ -3,93 +3,66 @@ name: Update Movies Data
 on:
   schedule:
     - cron: '0 16 * * *'  # 北京时间 00:00 (UTC+8)
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
     env:
-      TZ: Asia/Shanghai  # 设置时区为北京时间
+      TZ: Asia/Shanghai
       TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
     permissions:
-      contents: write  # 允许推送代码
-    
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 获取完整历史记录
-      
-      - name: Set up Node.js
+          fetch-depth: 0
+
+      - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          
-      - name: Install dependencies
+          node-version: '20'
+
+      - name: Install dependencies locally (no config files)
         run: |
-          npm install axios cheerio
-          
+          # 创建临时 node_modules 但不生成任何配置文件
+          npm install --no-package-lock --no-save --ignore-scripts \
+            axios@1.6.7 \
+            cheerio@1.0.0-rc.12
+          echo "Dependencies installed in ./node_modules"
+
       - name: Setup data directory
         run: |
           mkdir -p data
           chmod 755 data
-          
-      - name: Backup current data
-        run: |
-          if [ -f data/movies-data.json ]; then
-            cp data/movies-data.json data/movies-data.backup.json
-            chmod 644 data/movies-data.backup.json
-          fi
-          
+
       - name: Update Movies data
         id: update
         run: |
+          # 临时修改 NODE_PATH 确保能找到本地模块
+          export NODE_PATH=./node_modules
           node scripts/update-movies-data.js
           chmod 644 data/movies-data.json
         continue-on-error: true
-        
-      - name: Debug data directory and git status
-        run: |
-          ls -l data
-          git status
-          
+
       - name: Check for changes
         id: git-check
         run: |
-          git diff --quiet data/movies-data.json || echo "changes=true" >> $GITHUB_OUTPUT
-          
-      - name: Commit and push if changed (including new files)
+          git diff --exit-code data/movies-data.json || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changes
         if: steps.git-check.outputs.changes == 'true'
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
           git add data/movies-data.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Update Movies data"
-            git push
-          else
-            echo "No changes to commit."
-          fi
-          
-      - name: Restore backup on failure
-        if: failure() && steps.update.outcome == 'failure'
+          git commit -m "Auto-update: Movies data $(date +'%Y-%m-%d')"
+          git pull --rebase
+          git push
+
+      - name: Cleanup
         run: |
-          if [ -f data/movies-data.backup.json ]; then
-            cp data/movies-data.backup.json data/movies-data.json
-            chmod 644 data/movies-data.json
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add data/movies-data.json
-            git commit -m "Restore Movies data after failed update [skip ci]"
-            git push
-          fi
-          
-      - name: Send notification on failure
-        if: failure()
-        run: |
-          echo "::warning::Failed to update movies data. Check the workflow run for details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          
-      - name: Send notification on success
-        if: success() && steps.git-check.outputs.changes == 'true'
-        run: |
-          echo "::notice::Movies data has been updated successfully. Changes have been committed and pushed." 
+          rm -rf node_modules  # 清除临时依赖
+          rm -f data/movies-data.backup.json

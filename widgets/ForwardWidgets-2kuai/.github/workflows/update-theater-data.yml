@@ -9,20 +9,21 @@ jobs:
   update-data:
     runs-on: ubuntu-latest
     env:
-      TZ: Asia/Shanghai  # 设置时区为北京时间
+      TZ: Asia/Shanghai
       TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
     
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
           
       - name: Install dependencies
         run: |
-          npm install axios cheerio
+          npm install --no-package-lock --no-save axios cheerio
+          # 临时安装到 node_modules 但不创建配置文件
           
       - name: Create data directory
         run: mkdir -p data
@@ -36,4 +37,4 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data/theater-data.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update theater data" && git push) 
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update theater data [skip ci]" && git push)
