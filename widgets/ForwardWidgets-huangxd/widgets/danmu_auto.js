@@ -15,7 +15,7 @@
 WidgetMetadata = {
   id: "forward.auto.danmu2",
   title: "自动链接弹幕v2",
-  version: "2.0.0",
+  version: "2.0.2",
   requiredVersion: "0.0.2",
   description: "自动获取播放链接并从服务器获取弹幕【五折码：CHEAP.5;七折码：CHEAP】",
   author: "huangxd",
@@ -644,7 +644,7 @@ async function get360Zongyi(title, entId, site, year) {
         links.push({
             "name": episodeInfo.id,
             "url": episodeInfo.url,
-            "title": `【${site}】 #${episodeInfo.name} ${episodeInfo.period}#`,
+            "title": `【${site}】 ${episodeInfo.name} ${episodeInfo.period}`,
             "sort": epNum || episodeInfo.sort || null
         });
       }
@@ -1265,6 +1265,19 @@ function encryptStr(str) {
   return '*'.repeat(str.length);
 }
 
+// RGB 转整数的函数
+function rgbToInt(color) {
+  // 检查 RGB 值是否有效
+  if (
+    typeof color.r !== 'number' || color.r < 0 || color.r > 255 ||
+    typeof color.g !== 'number' || color.g < 0 || color.g > 255 ||
+    typeof color.b !== 'number' || color.b < 0 || color.b > 255
+  ) {
+    return -1;
+  }
+  return color.r * 256 * 256 + color.g * 256 + color.b;
+}
+
 // =====================
 // 获取腾讯弹幕
 // =====================
@@ -1274,7 +1287,6 @@ async function fetchTencentVideo(inputUrl, segmentTime, tmdbId, season, episode)
 
   // 弹幕 API 基础地址
   const api_danmaku_base = "https://dm.video.qq.com/barrage/base/";
-  const api_danmaku_segment = "https://dm.video.qq.com/barrage/segment/";
 
   // 解析 URL 获取 vid
   let vid;
@@ -1563,7 +1575,7 @@ async function fetchMangoTV(inputUrl, segmentTime, tmdbId, season, episode) {
 
   // 弹幕和视频信息 API 基础地址
   const api_video_info = "https://pcweb.api.mgtv.com/video/info";
-  const api_danmaku = "https://galaxy.bz.mgtv.com/rdbarrage";
+  const api_ctl_barrage = "https://galaxy.bz.mgtv.com/getctlbarrage";
 
   // 解析 URL 获取 cid 和 vid
   // 手动解析 URL（没有 URL 对象的情况下）
@@ -1594,7 +1606,7 @@ async function fetchMangoTV(inputUrl, segmentTime, tmdbId, season, episode) {
       },
     });
   } catch (error) {
-    log("info", "请求视频信息失败:", error);
+    log("error", "请求视频信息失败:", error);
     return [];
   }
 
@@ -1604,17 +1616,30 @@ async function fetchMangoTV(inputUrl, segmentTime, tmdbId, season, episode) {
   log("info", "标题:", title);
 
   // 计算弹幕分段请求
-  const step = 60 * 1000; // 每60秒一个分段
-  const end_time = time_to_second(time) * 1000; // 将视频时长转换为毫秒
-
   let segmentList = [];
-  for (let i = 0; i < end_time; i += step) {
-    const danmakuUrl = `${api_danmaku}?vid=${vid}&cid=${cid}&time=${i}`;
-    segmentList.push({
-      "segment_start": i,
-      "segment_end": i + step,
-      "url": danmakuUrl
+
+  try {
+    const ctlBarrageUrl = `${api_ctl_barrage}?version=8.1.39&abroad=0&uuid=&os=10.15.7&platform=0&mac=&vid=${vid}&pid=&cid=${cid}&ticket=`;
+    const res = await Widget.http.get(ctlBarrageUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+      },
     });
+    const ctlBarrage = typeof res.data === "string" ? JSON.parse(res.data) : res.data;
+
+    // 每1分钟一个分段
+    for (let i = 0; i < Math.ceil(time_to_second(time) / 60); i += 1) {
+      const danmakuUrl = `https://${ctlBarrage.data?.cdn_list.split(',')[0]}/${ctlBarrage.data?.cdn_version}/${i}.json`;
+      segmentList.push({
+        "segment_start": i * 60 * 1000,
+        "segment_end": (i + 1) * 60 * 1000,
+        "url": danmakuUrl
+      });
+    }
+  } catch (error) {
+    log("error", "请求弹幕分片失败:", error);
+    return [];
   }
 
   const domain = ".mgtv.com";
@@ -1630,6 +1655,34 @@ async function fetchMangoTV(inputUrl, segmentTime, tmdbId, season, episode) {
 
 async function fetchMangoDanmaku(segment) {
   log("info", "开始从本地请求芒果TV弹幕...", segment);
+
+  // 默认颜色值
+  const DEFAULT_COLOR_INT = -1;
+
+  // 处理 v2_color 对象的转换逻辑
+  function transformV2Color(v2_color) {
+    // 如果 v2_color 不存在，返回默认值
+    if (!v2_color) {
+      return DEFAULT_COLOR_INT;
+    }
+    // 计算左右颜色的整数值
+    const leftColor = rgbToInt(v2_color.color_left);
+    const rightColor = rgbToInt(v2_color.color_right);
+    // 如果左右颜色均为 -1，返回默认值
+    if (leftColor === -1 && rightColor === -1) {
+      return DEFAULT_COLOR_INT;
+    }
+    // 如果左颜色无效，返回右颜色
+    if (leftColor === -1) {
+      return rightColor;
+    }
+    // 如果右颜色无效，返回左颜色
+    if (rightColor === -1) {
+      return leftColor;
+    }
+    // 返回左右颜色的平均值
+    return Math.floor((leftColor + rightColor) / 2);
+  }
 
   // 解析弹幕数据
   let contents = [];
@@ -1652,10 +1705,15 @@ async function fetchMangoDanmaku(segment) {
         uid: 0,		//发送人的 id
         content: "",
       };
-      if (item.type === 1) {
-        content.ct = 5;
-      } else if (item.type === 2) {
-        content.ct = 4;
+      if (item?.v2_color) {
+        content.color = transformV2Color(item?.v2_color);
+      }
+      if (item?.v2_position) {
+        if (item?.v2_position === 1) {
+          content.ct = 5;
+        } else if (item?.v2_position === 2) {
+          content.ct = 4;
+        }
       }
       content.timepoint = item.time / 1000;
       content.content = item.content;
@@ -3280,7 +3338,43 @@ function matchSeason(anime, queryTitle, season) {
   }
 }
 
+// 提取年份的辅助函数
+function extractYear(animeTitle) {
+  const match = animeTitle.match(/\((\d{4})\)/);
+  return match ? parseInt(match[1]) : null;
+}
+
+// 按年份降序排序并添加到curAnimes
+function sortAndPushAnimesByYear(processedAnimes, curAnimes) {
+  processedAnimes
+    .filter(anime => anime !== null)
+    .sort((a, b) => {
+      const yearA = extractYear(a.animeTitle);
+      const yearB = extractYear(b.animeTitle);
+
+      // 如果都有年份，按年份降序排列
+      if (yearA !== null && yearA !== undefined && yearB !== null && yearB !== undefined) {
+        return yearB - yearA;
+      }
+      // 如果只有a有年份，a排在前面
+      if ((yearA !== null && yearA !== undefined) && (yearB === null || yearB === undefined)) {
+        return -1;
+      }
+      // 如果只有b有年份，b排在前面
+      if ((yearA === null || yearA === undefined) && (yearB !== null && yearB !== undefined)) {
+        return 1;
+      }
+      // 如果都没有年份，保持原顺序
+      return 0;
+    })
+    .forEach(anime => {
+      curAnimes.push(anime);
+    });
+}
+
 async function handleVodAnimes(animesVod, curAnimes, key) {
+  const tmpAnimes = [];
+
   const processVodAnimes = await Promise.all(animesVod.map(async (anime) => {
     let vodPlayFromList = anime.vod_play_from.split("$$$");
     vodPlayFromList = vodPlayFromList.map(item => {
@@ -3305,7 +3399,7 @@ async function handleVodAnimes(animesVod, curAnimes, key) {
         links.push({
           "name": count,
           "url": epInfo[1],
-          "title": `【${platform}】 #${epInfo[0]}#`
+          "title": `【${platform}】 ${epInfo[0]}`
         });
       }
     }
@@ -3324,16 +3418,20 @@ async function handleVodAnimes(animesVod, curAnimes, key) {
         isFavorited: true,
       };
 
-      curAnimes.push(transformedAnime);
+      tmpAnimes.push(transformedAnime);
       addAnime({...transformedAnime, links: links});
       if (animes.length > MAX_ANIMES) removeEarliestAnime();
     }
   }));
 
+  sortAndPushAnimesByYear(tmpAnimes, curAnimes);
+
   return processVodAnimes;
 }
 
 async function handle360Animes(animes360, curAnimes) {
+  const tmpAnimes = [];
+
   const process360Animes = await Promise.all(animes360.map(async (anime) => {
     let links = [];
     if (anime.cat_name === "电影") {
@@ -3353,7 +3451,7 @@ async function handle360Animes(animes360, curAnimes) {
           links.push({
             "name": i + 1,
             "url": item.url,
-            "title": `【${anime.seriesSite}】 #${i + 1}#`
+            "title": `【${anime.seriesSite}】 ${i + 1}`
           });
         }
       }
@@ -3388,16 +3486,20 @@ async function handle360Animes(animes360, curAnimes) {
         isFavorited: true,
       };
 
-      curAnimes.push(transformedAnime);
+      tmpAnimes.push(transformedAnime);
       addAnime({...transformedAnime, links: links});
       if (animes.length > MAX_ANIMES) removeEarliestAnime();
     }
   }));
 
+  sortAndPushAnimesByYear(tmpAnimes, curAnimes);
+
   return process360Animes;
 }
 
 async function handleRenrenAnimes(animesRenren, queryTitle, curAnimes) {
+  const tmpAnimes = [];
+
   // 使用 map 和 async 时需要返回 Promise 数组，并等待所有 Promise 完成
   const processRenrenAnimes = await Promise.all(animesRenren
     .filter(s => s.title.includes(queryTitle))
@@ -3408,7 +3510,7 @@ async function handleRenrenAnimes(animesRenren, queryTitle, curAnimes) {
         links.push({
           "name": ep.episodeIndex,
           "url": ep.episodeId,
-          "title": `【${ep.provider}】 #${ep.title}#`
+          "title": `【${ep.provider}】 ${ep.title}`
         });
       }
 
@@ -3426,7 +3528,7 @@ async function handleRenrenAnimes(animesRenren, queryTitle, curAnimes) {
           isFavorited: true,
         };
 
-        curAnimes.push(transformedAnime);
+        tmpAnimes.push(transformedAnime);
 
         addAnime({...transformedAnime, links: links});
 
@@ -3434,6 +3536,8 @@ async function handleRenrenAnimes(animesRenren, queryTitle, curAnimes) {
       }
     })
   );
+
+  sortAndPushAnimesByYear(tmpAnimes, curAnimes);
 
   return processRenrenAnimes;
 }
@@ -3444,6 +3548,8 @@ async function handleHanjutvAnimes(animesHanjutv, queryTitle, curAnimes) {
   function getCategory(key) {
     return cateMap[key] || "其他";
   }
+
+  const tmpAnimes = [];
 
   // 使用 map 和 async 时需要返回 Promise 数组，并等待所有 Promise 完成
   const processHanjutvAnimes = await Promise.all(animesHanjutv
@@ -3457,7 +3563,7 @@ async function handleHanjutvAnimes(animesHanjutv, queryTitle, curAnimes) {
         links.push({
           "name": ep.title,
           "url": ep.pid,
-          "title": `【hanjutv】 #${epTitle}#`
+          "title": `【hanjutv】 ${epTitle}`
         });
       }
 
@@ -3475,7 +3581,7 @@ async function handleHanjutvAnimes(animesHanjutv, queryTitle, curAnimes) {
           isFavorited: true,
         };
 
-        curAnimes.push(transformedAnime);
+        tmpAnimes.push(transformedAnime);
 
         addAnime({...transformedAnime, links: links});
 
@@ -3484,10 +3590,14 @@ async function handleHanjutvAnimes(animesHanjutv, queryTitle, curAnimes) {
     })
   );
 
+  sortAndPushAnimesByYear(tmpAnimes, curAnimes);
+
   return processHanjutvAnimes;
 }
 
 async function handleBahamutAnimes(animesBahamut, queryTitle, curAnimes) {
+  const tmpAnimes = [];
+
   // 使用 map 和 async 时需要返回 Promise 数组，并等待所有 Promise 完成
   const processBahamutAnimes = await Promise.all(animesBahamut
     .filter(s => s.title.includes(queryTitle))
@@ -3501,7 +3611,7 @@ async function handleBahamutAnimes(animesBahamut, queryTitle, curAnimes) {
         links.push({
           "name": ep.episode,
           "url": ep.videoSn.toString(),
-          "title": `【bahamut】 #${epTitle}#`
+          "title": `【bahamut】 ${epTitle}`
         });
       }
 
@@ -3519,7 +3629,7 @@ async function handleBahamutAnimes(animesBahamut, queryTitle, curAnimes) {
           isFavorited: true,
         };
 
-        curAnimes.push(transformedAnime);
+        tmpAnimes.push(transformedAnime);
 
         addAnime({...transformedAnime, links: links});
 
@@ -3527,6 +3637,8 @@ async function handleBahamutAnimes(animesBahamut, queryTitle, curAnimes) {
       }
     })
   );
+
+  sortAndPushAnimesByYear(tmpAnimes, curAnimes);
 
   return processBahamutAnimes;
 }
@@ -3547,7 +3659,7 @@ async function searchAnime(queryTitle) {
       "type": "type",
       "typeDescription": "string",
       "imageUrl": "string",
-      "startDate": "2025-08-08T13:25:11.189Z",
+      "startDate": "2025-01-01T00:00:00",
       "episodeCount": 1,
       "rating": 0,
       "isFavorited": true
@@ -3569,7 +3681,7 @@ async function searchAnime(queryTitle) {
     const links = [{
       "name": "手动解析链接弹幕",
       "url": queryTitle,
-      "title": `【${platform}】 #${queryTitle}#`
+      "title": `【${platform}】 ${queryTitle}`
     }];
     curAnimes.push(tmpAnime);
     addAnime({...tmpAnime, links: links});
