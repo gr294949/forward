@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-12-13T08:49:55.891+08:00",
+  "last_updated": "2025-12-14T08:57:23.624+08:00",
   "tv": {
     "全网": [
       {
@@ -14,6 +14,17 @@
         "mediaType": "tv"
       },
       {
+        "id": 254482,
+        "type": "tmdb",
+        "title": "长安二十四计",
+        "description": "文承年间，虎贲暗卫盘踞长安城多年，已根深蒂固。淮南县衙主簿胡濙收到帝王姬武阳秘密诏书，被急调入国都长安，铲除奸佞。虎贲将军言凤山不甘于大权旁落，集结虎贲暗卫的势力企图裂国而治、自立为王。他以长安城中的藏兵巷作为掩护，将暗卫分布其中，一直在寻找反击的时机。在姬武阳的帮助下，胡濙联合忠义将领顾玉、剑客叶峥、画师白莞、年轻文士谢子凌等人以智谋捣毁藏兵巷，摧毁言凤山妄图裂国的阴谋，还长安城风朗气清。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/i8VPuOb1EsyB3FX6dlEMCEFPEun.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/khHpr9W9cZ7mlQGvabC2IeG69pg.jpg",
+        "releaseDate": "2025-12-12",
+        "rating": 10,
+        "mediaType": "tv"
+      },
+      {
         "id": 251994,
         "type": "tmdb",
         "title": "大生意人",
@@ -21,18 +32,18 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/htvcf2HU0gsRcvApvUNNMYKdI3k.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/95irEMwDL14I8ICyAeUxVCucq4c.jpg",
         "releaseDate": "2025-11-25",
-        "rating": 6.8,
+        "rating": 6.6,
         "mediaType": "tv"
       },
       {
-        "id": 254482,
+        "id": 279041,
         "type": "tmdb",
-        "title": "长安二十四计",
-        "description": "文承年间，虎贲暗卫盘踞长安城多年，已根深蒂固。淮南县衙主簿胡濙收到帝王姬武阳秘密诏书，被急调入国都长安，铲除奸佞。虎贲将军言凤山不甘于大权旁落，集结虎贲暗卫的势力企图裂国而治、自立为王。他以长安城中的藏兵巷作为掩护，将暗卫分布其中，一直在寻找反击的时机。在姬武阳的帮助下，胡濙联合忠义将领顾玉、剑客叶峥、画师白莞、年轻文士谢子凌等人以智谋捣毁藏兵巷，摧毁言凤山妄图裂国的阴谋，还长安城风朗气清。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/9DKEd80jWJjiME27nJmTzdVtOLr.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/khHpr9W9cZ7mlQGvabC2IeG69pg.jpg",
+        "title": "双轨",
+        "description": "姜暮九岁之前是活在蜜罐里的妹妹，靳朝是天之骄子的哥哥。他们的人生从她九岁那年起迈入两条无法相交的轨道。那年父母离婚，爸爸和哥哥远赴泰国谋生，她得知哥哥被领养的秘密，只身飞往泰国。再见面，曾经的翩翩少年从白色变成灰色，一个满身市井锋芒的青年，他打拳、赛车，在她完全陌生的世界危机重重。虽如愿重逢，但她面对他，也有不可言说的拘谨不安，她义无反顾奔赴的哥哥竟变成陌生人。从陌生人到恋人，姜暮走了看得见的100步，靳朝刚开始步步退，而后决心勇敢面对爱，走了别人看不见的120步。炼狱里的靳朝太苦，想把姜暮挡在炼狱之外，姜暮却孤注一掷，坚定地走向他，要带靳朝回国、回家，两人用自己的方式实现双向奔赴。从此，朝为日，暮为月，日月同辉，朝朝暮暮再不分离。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/nSaoxKb122lJSq21JH0jPvdUGpL.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/bMH8FwXLo7zSJBL9ff9tWBcGOP1.jpg",
         "releaseDate": "2025-12-12",
-        "rating": 10,
+        "rating": 0,
         "mediaType": "tv"
       },
       {
@@ -64,7 +75,7 @@
         "description": "该剧讲述澳门“风潮”时期，何若贤、冯柏川、沈氏兄弟等人携手在金融、谍报、物资运输等领域的抗战风云故事，也是第一次将镜头完全聚焦于“孤岛”澳门——这块未遭日本侵占，却仍然英勇抗击共赴国难的土地。",
         "posterPath": "https://image.tmdb.org/t/p/w500/eZ7jw8gavFcuLPh0FAT6LXMhWIW.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/5zn4zdGNCp50W5d3Xt24PObJNwM.jpg",
-        "releaseDate": "2025-12-09",
+        "releaseDate": "2025-12-08",
         "rating": 0,
         "mediaType": "tv"
       },
@@ -91,25 +102,14 @@
         "mediaType": "tv"
       },
       {
-        "id": 263218,
+        "id": 211089,
         "type": "tmdb",
-        "title": "亦舞之城",
-        "description": "芭蕾舞艺术家谭思婷退役归国，欲与当年被迫分开的恋人冯睿破镜重圆，但是过去的误会如同天堑一般隔断两人。如今的冯睿独自一个人带着孩子，生活如同深潭静水，谭思婷回来如同一颗石子搅乱了一切。而谭思婷身边也有一个默默爱了她十年的暗恋者，这次勇敢追爱对她不离不弃。冯睿和谭思婷彼此逃避对方，但是命运的漩涡却不断的将两人裹挟其中，令他们爱恨两难。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/eQhBiO0ELLjOsUPW47ZEwEs62KU.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/yB0WlkEWHk8MKVptutO5awGUM23.jpg",
-        "releaseDate": "2025-11-27",
-        "rating": 9,
-        "mediaType": "tv"
-      },
-      {
-        "id": 279041,
-        "type": "tmdb",
-        "title": "双轨",
-        "description": "姜暮九岁之前是活在蜜罐里的妹妹，靳朝是天之骄子的哥哥。他们的人生从她九岁那年起迈入两条无法相交的轨道。那年父母离婚，爸爸和哥哥远赴泰国谋生，她得知哥哥被领养的秘密，只身飞往泰国。再见面，曾经的翩翩少年从白色变成灰色，一个满身市井锋芒的青年，他打拳、赛车，在她完全陌生的世界危机重重。虽如愿重逢，但她面对他，也有不可言说的拘谨不安，她义无反顾奔赴的哥哥竟变成陌生人。从陌生人到恋人，姜暮走了看得见的100步，靳朝刚开始步步退，而后决心勇敢面对爱，走了别人看不见的120步。炼狱里的靳朝太苦，想把姜暮挡在炼狱之外，姜暮却孤注一掷，坚定地走向他，要带靳朝回国、回家，两人用自己的方式实现双向奔赴。从此，朝为日，暮为月，日月同辉，朝朝暮暮再不分离。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/nSaoxKb122lJSq21JH0jPvdUGpL.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/bMH8FwXLo7zSJBL9ff9tWBcGOP1.jpg",
-        "releaseDate": "2025-12-12",
-        "rating": 0,
+        "title": "唐朝诡事录",
+        "description": "该剧改编自作家魏风华同名原著，讲述了在繁华的大唐盛世之下发生的一系列奇闻异事，长安金吾卫中郎将卢凌风将与狄公亲传弟子苏无名携手共破诡案，守护苍生，担负起挽救社稷于危急的使命。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/sgv6nwj1TlDDKqxbcUEuds8fqoz.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/8b5yXvmWSOl64Abk1wMYhzs4OnP.jpg",
+        "releaseDate": "2022-09-27",
+        "rating": 8.338,
         "mediaType": "tv"
       }
     ],
@@ -119,7 +119,7 @@
         "type": "tmdb",
         "title": "长安二十四计",
         "description": "文承年间，虎贲暗卫盘踞长安城多年，已根深蒂固。淮南县衙主簿胡濙收到帝王姬武阳秘密诏书，被急调入国都长安，铲除奸佞。虎贲将军言凤山不甘于大权旁落，集结虎贲暗卫的势力企图裂国而治、自立为王。他以长安城中的藏兵巷作为掩护，将暗卫分布其中，一直在寻找反击的时机。在姬武阳的帮助下，胡濙联合忠义将领顾玉、剑客叶峥、画师白莞、年轻文士谢子凌等人以智谋捣毁藏兵巷，摧毁言凤山妄图裂国的阴谋，还长安城风朗气清。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/9DKEd80jWJjiME27nJmTzdVtOLr.jpg",
+        "posterPath": "https://image.tmdb.org/t/p/w500/i8VPuOb1EsyB3FX6dlEMCEFPEun.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/khHpr9W9cZ7mlQGvabC2IeG69pg.jpg",
         "releaseDate": "2025-12-12",
         "rating": 10,
@@ -192,6 +192,17 @@
         "mediaType": "tv"
       },
       {
+        "id": 308085,
+        "type": "tmdb",
+        "title": "反人类暴行",
+        "description": "追溯731部队细菌战暴行，回望历史疮痍，祈愿人类和平。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/onGhkyHSVpDl2Ro8dLhUMLefCEF.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/mPZgA3bKjYdxiVFzvdZytjrQVrA.jpg",
+        "releaseDate": "2025-12-13",
+        "rating": 0,
+        "mediaType": "tv"
+      },
+      {
         "id": 254488,
         "type": "tmdb",
         "title": "灼灼韶华",
@@ -212,17 +223,6 @@
         "releaseDate": "2025-11-01",
         "rating": 8,
         "mediaType": "tv"
-      },
-      {
-        "id": 106449,
-        "type": "tmdb",
-        "title": "凡人修仙传",
-        "description": "平凡少年韩立出生贫困，为了让家人过上更好的生活，自愿前去七玄门参加入门考核，最终被墨大夫收入门下。墨大夫一开始对韩立悉心培养、传授医术，让韩立对他非常感激，但随着一同入门的弟子张铁失踪，韩立才发现了墨大夫的真面目。墨大夫试图夺舍韩立，最终却被韩立反杀。通过墨大夫的遗书韩立得知了一个全新世界：修仙界的存在。在帮助七玄门抵御外敌之后，韩立离开了七玄门，前去墨大夫的家中寻找暖阳宝玉解毒，并帮助墨家人打败了敌人。通过墨大夫之女墨彩环的口中得知太南小会地址，韩立为追寻修仙人的足迹决定前往太南小会，拜别家人后，韩立来到太南谷，结识了一众修仙人士，正式展开了自己的修仙之旅。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/i6SYuRHPtODpZ8VX9ql21nj0tDq.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/8NIvQY34tNPc4txNeym2zEYk9ek.jpg",
-        "releaseDate": "2020-07-25",
-        "rating": 8.6,
-        "mediaType": "tv"
       }
     ],
     "爱奇艺": [
@@ -234,18 +234,7 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/htvcf2HU0gsRcvApvUNNMYKdI3k.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/95irEMwDL14I8ICyAeUxVCucq4c.jpg",
         "releaseDate": "2025-11-25",
-        "rating": 6.8,
-        "mediaType": "tv"
-      },
-      {
-        "id": 286126,
-        "type": "tmdb",
-        "title": "风与潮",
-        "description": "该剧讲述澳门“风潮”时期，何若贤、冯柏川、沈氏兄弟等人携手在金融、谍报、物资运输等领域的抗战风云故事，也是第一次将镜头完全聚焦于“孤岛”澳门——这块未遭日本侵占，却仍然英勇抗击共赴国难的土地。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/eZ7jw8gavFcuLPh0FAT6LXMhWIW.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/5zn4zdGNCp50W5d3Xt24PObJNwM.jpg",
-        "releaseDate": "2025-12-09",
-        "rating": 0,
+        "rating": 6.6,
         "mediaType": "tv"
       },
       {
@@ -260,6 +249,17 @@
         "mediaType": "tv"
       },
       {
+        "id": 286126,
+        "type": "tmdb",
+        "title": "风与潮",
+        "description": "该剧讲述澳门“风潮”时期，何若贤、冯柏川、沈氏兄弟等人携手在金融、谍报、物资运输等领域的抗战风云故事，也是第一次将镜头完全聚焦于“孤岛”澳门——这块未遭日本侵占，却仍然英勇抗击共赴国难的土地。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/eZ7jw8gavFcuLPh0FAT6LXMhWIW.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/5zn4zdGNCp50W5d3Xt24PObJNwM.jpg",
+        "releaseDate": "2025-12-08",
+        "rating": 0,
+        "mediaType": "tv"
+      },
+      {
         "id": 211089,
         "type": "tmdb",
         "title": "唐朝诡事录",
@@ -267,7 +267,7 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/sgv6nwj1TlDDKqxbcUEuds8fqoz.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/8b5yXvmWSOl64Abk1wMYhzs4OnP.jpg",
         "releaseDate": "2022-09-27",
-        "rating": 8.3,
+        "rating": 8.338,
         "mediaType": "tv"
       },
       {
@@ -289,7 +289,7 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/jOEKN1yCpbTwuVCN4RxLCVHEn8c.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/7dH63uoQDQu6pfYJLNKQYLXJ38m.jpg",
         "releaseDate": "2025-09-11",
-        "rating": 5.9,
+        "rating": 6,
         "mediaType": "tv"
       },
       {
@@ -388,7 +388,7 @@
         "title": "他为什么依然单身",
         "description": "一个貌似怪咖、实则善良的人，最终被世界宽容的故事。通过塑造一个极致怪癖的男人，引发吐槽、笑料百出的同时，带来有关人与世界的思考。热爱生活的男人年至不惑，却宣称“不婚”，是众星拱月的男神，还是女人避之不及的直男？是“不想结婚”还是“不能结婚”？当一位独身怪癖大叔，终于遇到心目中的女神，他将如何应对，最终抱得美人归。食无定味，适口者珍！没有不结婚的男人，只是没有找到适配的那个人罢了。",
         "posterPath": "https://image.tmdb.org/t/p/w500/bubNWLmQlkv8KxRxHgbFaRo4cEN.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/5kX8NTtYE67eT5VE4dXspW1wtzi.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/h98P6wbfNuQPorSCt9o4nh1HMlM.jpg",
         "releaseDate": "2025-11-16",
         "rating": 8.3,
         "mediaType": "tv"
@@ -473,17 +473,6 @@
         "mediaType": "tv"
       },
       {
-        "id": 126763,
-        "type": "tmdb",
-        "title": "我哥我嫂",
-        "description": "女知青夏一男（王雅捷饰）与恋人彭光明（王挺饰）真心相爱，不料婚礼当天的一场意外，让彭光明成为了植物人。夏一男不顾母亲反对，忍着悲痛走进彭家成为“二嫂”，照顾昏迷不醒的彭光明，以及去世大哥留下的两个孩子和年幼的四弟彭光亮。各种事端此起彼伏，生活的艰辛和困苦向夏一男扑面砸来。在一个女人最美好的年华，夏一男用宽广的胸襟和大爱撑起了一个家。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/9qf9wzsVUx9uzjCJHDOqH1pCqe1.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/m1KgW9IBj9PRsp4SW3j43jCPxA2.jpg",
-        "releaseDate": "2019-12-08",
-        "rating": 0,
-        "mediaType": "tv"
-      },
-      {
         "id": 308083,
         "type": "tmdb",
         "title": "大国船梦",
@@ -491,6 +480,17 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/pyPTzqWRZ3H8vH5H76BwkZaBlkf.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/jLQqtc2wNbWlhn2NDkbMYAeYqPo.jpg",
         "releaseDate": "2025-11-20",
+        "rating": 0,
+        "mediaType": "tv"
+      },
+      {
+        "id": 126763,
+        "type": "tmdb",
+        "title": "我哥我嫂",
+        "description": "女知青夏一男（王雅捷饰）与恋人彭光明（王挺饰）真心相爱，不料婚礼当天的一场意外，让彭光明成为了植物人。夏一男不顾母亲反对，忍着悲痛走进彭家成为“二嫂”，照顾昏迷不醒的彭光明，以及去世大哥留下的两个孩子和年幼的四弟彭光亮。各种事端此起彼伏，生活的艰辛和困苦向夏一男扑面砸来。在一个女人最美好的年华，夏一男用宽广的胸襟和大爱撑起了一个家。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/9qf9wzsVUx9uzjCJHDOqH1pCqe1.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/m1KgW9IBj9PRsp4SW3j43jCPxA2.jpg",
+        "releaseDate": "2019-12-08",
         "rating": 0,
         "mediaType": "tv"
       },
@@ -539,17 +539,6 @@
         "mediaType": "tv"
       },
       {
-        "id": 135700,
-        "type": "tmdb",
-        "title": "甜蜜计划",
-        "description": "　　该剧讲述了一对没车、没房、没孩子的80后夫妻在结婚受阻、找工作受挫、养孩子无助等一系列问题令他们手足无措，幸而有哥哥、嫂子和母亲等家人的帮助，让幼稚的大孩子变成了有担当的成人的故事。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/7QtVd6UJBDkKwiXlehZjiSUbjWN.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/m5qG00eTH4nmJ5LHLZHKcuqxlP5.jpg",
-        "releaseDate": "2021-03-21",
-        "rating": 0,
-        "mediaType": "tv"
-      },
-      {
         "id": 86617,
         "type": "tmdb",
         "title": "大话西游之爱你一万年",
@@ -558,6 +547,17 @@
         "backdropPath": "https://image.tmdb.org/t/p/w500/q2PRZRjMX0kH0sRTgD62rROtZL0.jpg",
         "releaseDate": "2017-09-28",
         "rating": 4.5,
+        "mediaType": "tv"
+      },
+      {
+        "id": 246981,
+        "type": "tmdb",
+        "title": "创想季",
+        "description": "大学时代同寝室的四个铁哥们毕业在即。一次突发的事件让这四个毫无背景却心怀大志的草根青年为了在“北京”这块充满机遇的土地上实现各自的人生梦想，决定“抱团取暖”合租一套房子。没想到至此麻烦不断。几人在艰难的找房过程中受到启发，决定自己创业，准备以“互联网+”的思维和全新的商业模式为同样受到租房困扰的北漂们服务。几个好朋友相互理解、相互配合，几经周折，在经历了种种磨难后，面对利益与责任、财富与梦想、亲情与诱惑、爱情与背叛，终于突破了自我，创造出一条通往梦想之路。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/qx61amwiWCZASEYivoXBMiovku9.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/oAyaSJwoDXD4rQjPWdtPbt8D41t.jpg",
+        "releaseDate": "2024-02-21",
+        "rating": 9,
         "mediaType": "tv"
       }
     ],
@@ -607,17 +607,6 @@
         "mediaType": "tv"
       },
       {
-        "id": 126763,
-        "type": "tmdb",
-        "title": "我哥我嫂",
-        "description": "女知青夏一男（王雅捷饰）与恋人彭光明（王挺饰）真心相爱，不料婚礼当天的一场意外，让彭光明成为了植物人。夏一男不顾母亲反对，忍着悲痛走进彭家成为“二嫂”，照顾昏迷不醒的彭光明，以及去世大哥留下的两个孩子和年幼的四弟彭光亮。各种事端此起彼伏，生活的艰辛和困苦向夏一男扑面砸来。在一个女人最美好的年华，夏一男用宽广的胸襟和大爱撑起了一个家。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/9qf9wzsVUx9uzjCJHDOqH1pCqe1.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/m1KgW9IBj9PRsp4SW3j43jCPxA2.jpg",
-        "releaseDate": "2019-12-08",
-        "rating": 0,
-        "mediaType": "tv"
-      },
-      {
         "id": 308083,
         "type": "tmdb",
         "title": "大国船梦",
@@ -625,6 +614,17 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/pyPTzqWRZ3H8vH5H76BwkZaBlkf.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/jLQqtc2wNbWlhn2NDkbMYAeYqPo.jpg",
         "releaseDate": "2025-11-20",
+        "rating": 0,
+        "mediaType": "tv"
+      },
+      {
+        "id": 126763,
+        "type": "tmdb",
+        "title": "我哥我嫂",
+        "description": "女知青夏一男（王雅捷饰）与恋人彭光明（王挺饰）真心相爱，不料婚礼当天的一场意外，让彭光明成为了植物人。夏一男不顾母亲反对，忍着悲痛走进彭家成为“二嫂”，照顾昏迷不醒的彭光明，以及去世大哥留下的两个孩子和年幼的四弟彭光亮。各种事端此起彼伏，生活的艰辛和困苦向夏一男扑面砸来。在一个女人最美好的年华，夏一男用宽广的胸襟和大爱撑起了一个家。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/9qf9wzsVUx9uzjCJHDOqH1pCqe1.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/m1KgW9IBj9PRsp4SW3j43jCPxA2.jpg",
+        "releaseDate": "2019-12-08",
         "rating": 0,
         "mediaType": "tv"
       },
@@ -651,17 +651,6 @@
         "mediaType": "tv"
       },
       {
-        "id": 110329,
-        "type": "tmdb",
-        "title": "伟大的转折",
-        "description": "　　1934年12月进入贵州到1935年5月出贵州，历经了被国民党大军层层围堵，在长征中遭受湘江惨败之后的中央红军，被迫在通道转兵进入贵州，之后历经了黎平会议、猴场会议、突破乌江、遵义会议、土城战役、四渡赤水、扎西会议、遵义战役、苟坝会议、南渡乌江、西进云南、北渡金沙、会理会议等历程，千难万险，艰苦卓绝，在毛泽东的正确领导下中央红军摆脱了敌军的追堵拦截，粉碎了蒋介石围歼红军的计划。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/AbfB0CUSlPOz47OgCSz9YKgPiqC.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/mYlBXYVtJPQNwp8g1ujHFqtnn3e.jpg",
-        "releaseDate": "2019-08-26",
-        "rating": 10,
-        "mediaType": "tv"
-      },
-      {
         "id": 205328,
         "type": "tmdb",
         "title": "糊涂县令郑板桥",
@@ -670,6 +659,17 @@
         "backdropPath": "https://image.tmdb.org/t/p/w500/2Wc2v2ciVctAMigGSdUyB0JWWLe.jpg",
         "releaseDate": "2016-11-16",
         "rating": 0,
+        "mediaType": "tv"
+      },
+      {
+        "id": 84693,
+        "type": "tmdb",
+        "title": "我爱男保姆",
+        "description": "家庭煮夫方原过了五年“女主外，男主内”的生活，终于被日益强势的老婆嫌弃。为了挽救婚姻，方原毅然决然的踏上了去大城市的闯荡之路，凭借自己的一技之长，开始了全能男保姆的工作。这年头客户的要求都高：洗衣洗碗洗车、擦地擦窗擦烟机、修房修草修家电、看护看门看孩子、做饭做菜做月子餐，这些都只是基本技能，代驾代谈判代分手、送花送货送口信也不算稀奇事。碰上高小姐这样的客户，方原要给人家孩子每周当一天的爹；碰上马舒儿这样的客户，方原除了干活还得兼职心理治疗师、职业规划师；而碰上陆晴这样的客户，任凭方原十项全能，都依旧被连累得背黑锅、丢彩票，赚不到钱不说还得倒贴钱。三个女人一台戏，客户还是不能得罪的上帝，方原这个男保姆努力发挥正能量，做出口碑做出成绩。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/9FXo7X0XI7ufOg7shBaG8YxImnA.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/5ATCNi6P7zKRMIsRfYsagByIHwn.jpg",
+        "releaseDate": "2015-11-14",
+        "rating": 7.6,
         "mediaType": "tv"
       }
     ],
@@ -682,17 +682,6 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/kYBsHNgp8NkFK2foAwDXrKih6H0.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/zBKCjljaVmXgJYIanP1LJHiE8t2.jpg",
         "releaseDate": "1999-04-09",
-        "rating": 0,
-        "mediaType": "tv"
-      },
-      {
-        "id": 124844,
-        "type": "tmdb",
-        "title": "温州三家人",
-        "description": "本剧通过企业家向成晖、林一山、杨步真及他们后代的竞争和发展，反映了他们在新常态的背景下继续走在改革开放前列。在新基地的选址问题上他们起了冲突又和平解决，当年清华“本科女孩”张露来到温州考察，知道向成晖和林一山45都在“走出去”和新能源产业有了突破，大为赞赏，自己最终也嫁给了林一山。杨步真的时尚城项目在互联网上做文章，虽然做明星的夫人与自己打起冷战，他仍乐此不疲。向成晖儿子向向、潘小勇和爱尔兰三人创办电商“品上谷”。杨天真和林丹凤创办“红酒堡”，历经波折。他们办的互联网慈善项目吸引者众，感情生活也是有声有色。三位企业家创办民营银行风浪迭起。他们的后代向向等恰好遇上中央对互联网全力支持的政策，正是抓住这一机遇，向向他们再次抢占了先机，温州新一代人又走向时代的最前沿。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/6PF2KmP7aToxzZW1iINt8P58R0l.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/oY510ZxyvupKyDmkpji6pkxlzLL.jpg",
-        "releaseDate": "2021-05-03",
         "rating": 0,
         "mediaType": "tv"
       },
@@ -726,6 +715,17 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/pzM8fDwdp9OlZEzG90Apzp1Ms4a.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/yaQEkRTWAhXEsZH7Dq5w6uizbvn.jpg",
         "releaseDate": "2019-03-10",
+        "rating": 0,
+        "mediaType": "tv"
+      },
+      {
+        "id": 124844,
+        "type": "tmdb",
+        "title": "温州三家人",
+        "description": "本剧通过企业家向成晖、林一山、杨步真及他们后代的竞争和发展，反映了他们在新常态的背景下继续走在改革开放前列。在新基地的选址问题上他们起了冲突又和平解决，当年清华“本科女孩”张露来到温州考察，知道向成晖和林一山45都在“走出去”和新能源产业有了突破，大为赞赏，自己最终也嫁给了林一山。杨步真的时尚城项目在互联网上做文章，虽然做明星的夫人与自己打起冷战，他仍乐此不疲。向成晖儿子向向、潘小勇和爱尔兰三人创办电商“品上谷”。杨天真和林丹凤创办“红酒堡”，历经波折。他们办的互联网慈善项目吸引者众，感情生活也是有声有色。三位企业家创办民营银行风浪迭起。他们的后代向向等恰好遇上中央对互联网全力支持的政策，正是抓住这一机遇，向向他们再次抢占了先机，温州新一代人又走向时代的最前沿。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/6PF2KmP7aToxzZW1iINt8P58R0l.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/oY510ZxyvupKyDmkpji6pkxlzLL.jpg",
+        "releaseDate": "2021-05-03",
         "rating": 0,
         "mediaType": "tv"
       }
@@ -776,17 +776,6 @@
         "mediaType": "tv"
       },
       {
-        "id": 297642,
-        "type": "tmdb",
-        "title": "乌蒙深处",
-        "description": "麻青蒿、吴艾草、衮菖蒲自称“乌蒙三颗草”，在发展种、养殖业和文旅融合上取得了不俗的成绩，成了村里致富的带头人；衮月亮、龙凤碧等绣娘把指尖上的技艺变成了指尖上的经济，成为了远近闻名的苗绣非遗传承人，苗绣产品走出了村庄，走向了全国，走向了世界。然而在产业发展的道路上，并不是一帆风顺，如何把巩固脱贫攻坚成果与乡村振兴战略有效衔接，这是肖百合、杨国勇等村干部的历史责任和时代担当。在他们的引领和帮助下，悬崖村的一产、二产、三产齐头并进，美丽乡村不断提档升级，悬崖村村民的幸福感和获得感不断提升。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/4qpypCmfFGGunqwdjivtfV0wkqb.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/2rJG0ODgGPE5nGm2g2mIo3WNgl4.jpg",
-        "releaseDate": "2025-11-12",
-        "rating": 8,
-        "mediaType": "tv"
-      },
-      {
         "id": 245194,
         "type": "tmdb",
         "title": "欢乐家长群",
@@ -794,6 +783,17 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/vJ6mwgXxTi73pqSRTRGBdNxWAPA.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/f7pHnMAahc7Zi0Ce2az3puPCnHR.jpg",
         "releaseDate": "2024-02-01",
+        "rating": 8,
+        "mediaType": "tv"
+      },
+      {
+        "id": 297642,
+        "type": "tmdb",
+        "title": "乌蒙深处",
+        "description": "麻青蒿、吴艾草、衮菖蒲自称“乌蒙三颗草”，在发展种、养殖业和文旅融合上取得了不俗的成绩，成了村里致富的带头人；衮月亮、龙凤碧等绣娘把指尖上的技艺变成了指尖上的经济，成为了远近闻名的苗绣非遗传承人，苗绣产品走出了村庄，走向了全国，走向了世界。然而在产业发展的道路上，并不是一帆风顺，如何把巩固脱贫攻坚成果与乡村振兴战略有效衔接，这是肖百合、杨国勇等村干部的历史责任和时代担当。在他们的引领和帮助下，悬崖村的一产、二产、三产齐头并进，美丽乡村不断提档升级，悬崖村村民的幸福感和获得感不断提升。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/4qpypCmfFGGunqwdjivtfV0wkqb.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/2rJG0ODgGPE5nGm2g2mIo3WNgl4.jpg",
+        "releaseDate": "2025-11-12",
         "rating": 8,
         "mediaType": "tv"
       },
@@ -868,39 +868,6 @@
         "mediaType": "tv"
       },
       {
-        "id": 278324,
-        "type": "tmdb",
-        "title": "一路繁花",
-        "description": "节目邀请超高国民度和拥有丰富人生阅历的姐姐，组成大女主旅行团，携手2位青春洋溢的少年搭档，开启一场奇妙之旅，一场“追时间”的旅行。他们将打破年龄局限，在旅行中经历观念碰撞、代际碰撞和自我与团体的碰撞。带着自信、积极、向上、永不言弃的心态，一路丈量繁华，一路绽放“繁花”。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/iVdW0OlTN49kUMxW7Z8cVUtJloC.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/zJ6fZmY79Ae2pHbmwH4CuD7UrTh.jpg",
-        "releaseDate": "2025-01-11",
-        "rating": 6,
-        "mediaType": "tv"
-      },
-      {
-        "id": 257161,
-        "type": "tmdb",
-        "title": "喜人奇妙夜",
-        "description": "《喜人奇妙夜》是由腾讯视频、米未联合出品的一档原创新喜剧综艺，黄渤、秦昊、贾冰、高圆圆、马东、金靖、宋木子将作为观众代表，除此之外，每期还有一位神秘观众代表，陪伴大家度过一个又一个的喜剧奇妙夜晚！节目秉持“只要大声笑，烦恼都丢掉”的宗旨，喜剧小队们将围绕最具热点和最有共鸣的情绪主题演绎喜剧作品，用喜剧解构一切！",
-        "posterPath": "https://image.tmdb.org/t/p/w500/nQFCp0Tlfqq3NhF2kiNAGwXLfnX.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/5TvKAb7oS3N2K5h6VDIYJlKYtaY.jpg",
-        "releaseDate": "2024-06-28",
-        "rating": 5.5,
-        "mediaType": "tv"
-      },
-      {
-        "id": 238136,
-        "type": "tmdb",
-        "title": "你好，种地少年",
-        "description": "种地团继《种地吧》之后首次合体，兄弟十人将前往各自的家乡进行一次自驾游学之旅。出游之时，恰逢秋收时节，他们将一路游一路学,一路劳作，一路收获，在旅途中结识新农人、体验新生活、感受新乡村，以十个勤天的视角全面认识中国农业的现状。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/aUDt7i3hwipRBl29Sb0qc1Ihvw2.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/qwoH4WjAC79monjjMgjFNZ39Rod.jpg",
-        "releaseDate": "2023-10-26",
-        "rating": 9,
-        "mediaType": "tv"
-      },
-      {
         "id": 306210,
         "type": "tmdb",
         "title": "奔跑吧·天路篇",
@@ -920,6 +887,50 @@
         "backdropPath": "https://image.tmdb.org/t/p/w500/mneFQvpqPWnkOaNrXDlJ1OeX21B.jpg",
         "releaseDate": "2021-07-28",
         "rating": 8.1,
+        "mediaType": "tv"
+      },
+      {
+        "id": 257161,
+        "type": "tmdb",
+        "title": "喜人奇妙夜",
+        "description": "《喜人奇妙夜》是由腾讯视频、米未联合出品的一档原创新喜剧综艺，黄渤、秦昊、贾冰、高圆圆、马东、金靖、宋木子将作为观众代表，除此之外，每期还有一位神秘观众代表，陪伴大家度过一个又一个的喜剧奇妙夜晚！节目秉持“只要大声笑，烦恼都丢掉”的宗旨，喜剧小队们将围绕最具热点和最有共鸣的情绪主题演绎喜剧作品，用喜剧解构一切！",
+        "posterPath": "https://image.tmdb.org/t/p/w500/nQFCp0Tlfqq3NhF2kiNAGwXLfnX.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/5TvKAb7oS3N2K5h6VDIYJlKYtaY.jpg",
+        "releaseDate": "2024-06-28",
+        "rating": 5.5,
+        "mediaType": "tv"
+      },
+      {
+        "id": 278324,
+        "type": "tmdb",
+        "title": "一路繁花",
+        "description": "节目邀请超高国民度和拥有丰富人生阅历的姐姐，组成大女主旅行团，携手2位青春洋溢的少年搭档，开启一场奇妙之旅，一场“追时间”的旅行。他们将打破年龄局限，在旅行中经历观念碰撞、代际碰撞和自我与团体的碰撞。带着自信、积极、向上、永不言弃的心态，一路丈量繁华，一路绽放“繁花”。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/iVdW0OlTN49kUMxW7Z8cVUtJloC.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/zJ6fZmY79Ae2pHbmwH4CuD7UrTh.jpg",
+        "releaseDate": "2025-01-11",
+        "rating": 6,
+        "mediaType": "tv"
+      },
+      {
+        "id": 302997,
+        "type": "tmdb",
+        "title": "一起开麦吧",
+        "description": "《一起开麦吧》是一档“纯听觉”盲选演唱组合音乐竞技节目，40位音乐选手逐一匿名进行演唱，其余选手各自在单独隔间通过盲听的方式选择队友。互选组成3-4人的演唱组合，通过行业专家指导，进行多轮舞台对抗，由明星评审与观众共同选择出一个最强演唱组合厂牌。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/kicxt5sA4N4qMc6jM6d81CIETNr.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/iKfXCf2PEbi7opWssa04qjluM6p.jpg",
+        "releaseDate": "2025-10-18",
+        "rating": 0,
+        "mediaType": "tv"
+      },
+      {
+        "id": 238136,
+        "type": "tmdb",
+        "title": "你好，种地少年",
+        "description": "种地团继《种地吧》之后首次合体，兄弟十人将前往各自的家乡进行一次自驾游学之旅。出游之时，恰逢秋收时节，他们将一路游一路学,一路劳作，一路收获，在旅途中结识新农人、体验新生活、感受新乡村，以十个勤天的视角全面认识中国农业的现状。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/aUDt7i3hwipRBl29Sb0qc1Ihvw2.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/qwoH4WjAC79monjjMgjFNZ39Rod.jpg",
+        "releaseDate": "2023-10-26",
+        "rating": 9,
         "mediaType": "tv"
       }
     ],
@@ -1026,6 +1037,17 @@
     ],
     "爱奇艺": [
       {
+        "id": 306210,
+        "type": "tmdb",
+        "title": "奔跑吧·天路篇",
+        "description": "连接山河之极，感受疆藏之美。这一季，跑男团将从西藏到新疆，用脚步丈量祖国大好河山，用心感受大国疆土的辽阔与温暖。在西藏，邂逅日照金山的震撼，身着民族服饰融入藏地风情，体悟那份纯粹与神圣；在新疆，寻觅街头巷尾的美食香气，沉浸于多元文化的独特魅力，解锁不一样的奔跑体验。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/mIKn3d1dne1JQA1Y0LKaR1r2xMc.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/cqyFKk66fssTFjWLy5el2pdNDo6.jpg",
+        "releaseDate": "2025-11-22",
+        "rating": 0,
+        "mediaType": "tv"
+      },
+      {
         "id": 278324,
         "type": "tmdb",
         "title": "一路繁花",
@@ -1045,17 +1067,6 @@
         "backdropPath": "https://image.tmdb.org/t/p/w500/qwoH4WjAC79monjjMgjFNZ39Rod.jpg",
         "releaseDate": "2023-10-26",
         "rating": 9,
-        "mediaType": "tv"
-      },
-      {
-        "id": 306210,
-        "type": "tmdb",
-        "title": "奔跑吧·天路篇",
-        "description": "连接山河之极，感受疆藏之美。这一季，跑男团将从西藏到新疆，用脚步丈量祖国大好河山，用心感受大国疆土的辽阔与温暖。在西藏，邂逅日照金山的震撼，身着民族服饰融入藏地风情，体悟那份纯粹与神圣；在新疆，寻觅街头巷尾的美食香气，沉浸于多元文化的独特魅力，解锁不一样的奔跑体验。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/mIKn3d1dne1JQA1Y0LKaR1r2xMc.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/cqyFKk66fssTFjWLy5el2pdNDo6.jpg",
-        "releaseDate": "2025-11-22",
-        "rating": 0,
         "mediaType": "tv"
       },
       {
@@ -1081,17 +1092,6 @@
         "mediaType": "tv"
       },
       {
-        "id": 306845,
-        "type": "tmdb",
-        "title": "笑有新生",
-        "description": "《笑有新生》作为一档全新喜剧新人选培节目，以挖掘符合时代潮流的“喜剧新生”为核心目标，打造喜剧人才选拔与储备体系，传递年轻一代的独特视角。最终优胜选手将获得“春晚共创推荐卡”。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/mRd39FZDi4SkzYPsjaumRitYU6A.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/94JOko3h4ygZJ5XonpPxEAL8tyA.jpg",
-        "releaseDate": "2025-12-06",
-        "rating": 0,
-        "mediaType": "tv"
-      },
-      {
         "id": 258532,
         "type": "tmdb",
         "title": "开播吧！短剧季",
@@ -1099,6 +1099,17 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/mE4NeJcNCLmkUyRMHyJ7De6hOUQ.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/5DA4UAGN2Bb847tSoN9dfpECEP.jpg",
         "releaseDate": "2024-10-13",
+        "rating": 0,
+        "mediaType": "tv"
+      },
+      {
+        "id": 306845,
+        "type": "tmdb",
+        "title": "笑有新生",
+        "description": "《笑有新生》作为一档全新喜剧新人选培节目，以挖掘符合时代潮流的“喜剧新生”为核心目标，打造喜剧人才选拔与储备体系，传递年轻一代的独特视角。最终优胜选手将获得“春晚共创推荐卡”。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/mRd39FZDi4SkzYPsjaumRitYU6A.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/94JOko3h4ygZJ5XonpPxEAL8tyA.jpg",
+        "releaseDate": "2025-12-06",
         "rating": 0,
         "mediaType": "tv"
       }
@@ -1116,17 +1127,6 @@
         "mediaType": "tv"
       },
       {
-        "id": 257161,
-        "type": "tmdb",
-        "title": "喜人奇妙夜",
-        "description": "《喜人奇妙夜》是由腾讯视频、米未联合出品的一档原创新喜剧综艺，黄渤、秦昊、贾冰、高圆圆、马东、金靖、宋木子将作为观众代表，除此之外，每期还有一位神秘观众代表，陪伴大家度过一个又一个的喜剧奇妙夜晚！节目秉持“只要大声笑，烦恼都丢掉”的宗旨，喜剧小队们将围绕最具热点和最有共鸣的情绪主题演绎喜剧作品，用喜剧解构一切！",
-        "posterPath": "https://image.tmdb.org/t/p/w500/nQFCp0Tlfqq3NhF2kiNAGwXLfnX.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/5TvKAb7oS3N2K5h6VDIYJlKYtaY.jpg",
-        "releaseDate": "2024-06-28",
-        "rating": 5.5,
-        "mediaType": "tv"
-      },
-      {
         "id": 306210,
         "type": "tmdb",
         "title": "奔跑吧·天路篇",
@@ -1138,14 +1138,14 @@
         "mediaType": "tv"
       },
       {
-        "id": 300172,
+        "id": 257161,
         "type": "tmdb",
-        "title": "声鸣远扬2025",
-        "description": "《声鸣远扬2025》将通过不拘一格的创作逻辑，大小屏融合的“破壁”生态来持续打造音乐节目新品牌，挖掘培养下一代优秀青年歌唱人才，为国家文化事业和文化产业的发展，注入源源不断的新声活力。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/rssDsf0K9X6qjI9eCFw7kw07q21.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/hYwGacBAVQHPGhqFRkQpvELRBpL.jpg",
-        "releaseDate": "2025-11-09",
-        "rating": 0,
+        "title": "喜人奇妙夜",
+        "description": "《喜人奇妙夜》是由腾讯视频、米未联合出品的一档原创新喜剧综艺，黄渤、秦昊、贾冰、高圆圆、马东、金靖、宋木子将作为观众代表，除此之外，每期还有一位神秘观众代表，陪伴大家度过一个又一个的喜剧奇妙夜晚！节目秉持“只要大声笑，烦恼都丢掉”的宗旨，喜剧小队们将围绕最具热点和最有共鸣的情绪主题演绎喜剧作品，用喜剧解构一切！",
+        "posterPath": "https://image.tmdb.org/t/p/w500/nQFCp0Tlfqq3NhF2kiNAGwXLfnX.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/5TvKAb7oS3N2K5h6VDIYJlKYtaY.jpg",
+        "releaseDate": "2024-06-28",
+        "rating": 5.5,
         "mediaType": "tv"
       },
       {
@@ -1168,6 +1168,17 @@
         "backdropPath": "https://image.tmdb.org/t/p/w500/ndZBPyMZyVQTP8gMg0V4g4Q4PIE.jpg",
         "releaseDate": "2019-10-30",
         "rating": 7.5,
+        "mediaType": "tv"
+      },
+      {
+        "id": 300172,
+        "type": "tmdb",
+        "title": "声鸣远扬2025",
+        "description": "《声鸣远扬2025》将通过不拘一格的创作逻辑，大小屏融合的“破壁”生态来持续打造音乐节目新品牌，挖掘培养下一代优秀青年歌唱人才，为国家文化事业和文化产业的发展，注入源源不断的新声活力。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/rssDsf0K9X6qjI9eCFw7kw07q21.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/hYwGacBAVQHPGhqFRkQpvELRBpL.jpg",
+        "releaseDate": "2025-11-09",
+        "rating": 0,
         "mediaType": "tv"
       },
       {
@@ -1343,13 +1354,13 @@
         "mediaType": "tv"
       },
       {
-        "id": 300172,
+        "id": 305779,
         "type": "tmdb",
-        "title": "声鸣远扬2025",
-        "description": "《声鸣远扬2025》将通过不拘一格的创作逻辑，大小屏融合的“破壁”生态来持续打造音乐节目新品牌，挖掘培养下一代优秀青年歌唱人才，为国家文化事业和文化产业的发展，注入源源不断的新声活力。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/rssDsf0K9X6qjI9eCFw7kw07q21.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/hYwGacBAVQHPGhqFRkQpvELRBpL.jpg",
-        "releaseDate": "2025-11-09",
+        "title": "劲勇飞侠",
+        "description": "《劲勇飞侠》是由湖南广播电视台金鹰卡通卫视2025年打造的全国青少年体能竞技障碍赛。旨在通过核心力、平衡力、抓握力、上肢耐力、下肢爆发力、心肺能力的考验，展现中国青少年体能运动风采。节目将在全国海搜72名S级运动少年，全面推广体能障碍跑项目，为国际现代五项、奥运级赛事储备体育人才。打造中国青少年第一体育赛事IP、打造中国青少年第一赛事运动平台。",
+        "posterPath": null,
+        "backdropPath": null,
+        "releaseDate": "2025-10-18",
         "rating": 0,
         "mediaType": "tv"
       },
@@ -1365,24 +1376,24 @@
         "mediaType": "tv"
       },
       {
-        "id": 291862,
+        "id": 300172,
         "type": "tmdb",
-        "title": "背后",
-        "description": "《背后》是由郑方一主持、张泉灵担任对谈人的观察谈话类节目，在寻找背后故事的同时，也寻找答案和力量的观察谈话类节目。以“在路过的人生里照见背后的自己”为核心立意，聚焦当代社会对深度内容的渴求，在信息碎片化、情绪快餐化的当下，旨在通过“有温度的对谈”为观众提供一处心灵栖息地，唤醒人们对自我成长、精神力量的关注。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/9GULN35kQ4K8LYofJqF1VEixzgK.jpg",
-        "backdropPath": null,
-        "releaseDate": "2025-05-18",
+        "title": "声鸣远扬2025",
+        "description": "《声鸣远扬2025》将通过不拘一格的创作逻辑，大小屏融合的“破壁”生态来持续打造音乐节目新品牌，挖掘培养下一代优秀青年歌唱人才，为国家文化事业和文化产业的发展，注入源源不断的新声活力。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/rssDsf0K9X6qjI9eCFw7kw07q21.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/hYwGacBAVQHPGhqFRkQpvELRBpL.jpg",
+        "releaseDate": "2025-11-09",
         "rating": 0,
         "mediaType": "tv"
       },
       {
-        "id": 306823,
+        "id": 307202,
         "type": "tmdb",
-        "title": "在恋爱开始之前",
-        "description": "一场呈现全新“恋综101”格局的大型相亲社交实验真人秀。每位女嘉宾需要跟随内心在9个男嘉宾中找到唯一的答案。",
-        "posterPath": "https://image.tmdb.org/t/p/w500/kzLYvsyP40ZqGrSb9yPm8APV941.jpg",
-        "backdropPath": "https://image.tmdb.org/t/p/w500/7OAAtBUL4TL0VLDdYBSB8CfQOsd.jpg",
-        "releaseDate": "2025-11-25",
+        "title": "老板是新人",
+        "description": "一档以青年企业家成长为主线的纪实类真人秀。节目将邀请六组来自不同行业的青年代表。他们将在真实企业环境中直面任务：处理前辈的期待与现实的压力，寻找市场的突破，用新的经营逻辑应对机制升级。",
+        "posterPath": "https://image.tmdb.org/t/p/w500/rTbUcYjWpyvVujgibv72RXHyu9r.jpg",
+        "backdropPath": "https://image.tmdb.org/t/p/w500/kAAAO9uceKEtrwazkFOmv2VYdcN.jpg",
+        "releaseDate": "2025-11-29",
         "rating": 0,
         "mediaType": "tv"
       },
@@ -1394,17 +1405,6 @@
         "posterPath": "https://image.tmdb.org/t/p/w500/vbyH97TzIFa1m4Bv2xQ9uVX3iaQ.jpg",
         "backdropPath": "https://image.tmdb.org/t/p/w500/3IyvoEkgSy0i7DKse4Bvmd9wkag.jpg",
         "releaseDate": "2025-09-24",
-        "rating": 0,
-        "mediaType": "tv"
-      },
-      {
-        "id": 305779,
-        "type": "tmdb",
-        "title": "劲勇飞侠",
-        "description": "《劲勇飞侠》是由湖南广播电视台金鹰卡通卫视2025年打造的全国青少年体能竞技障碍赛。旨在通过核心力、平衡力、抓握力、上肢耐力、下肢爆发力、心肺能力的考验，展现中国青少年体能运动风采。节目将在全国海搜72名S级运动少年，全面推广体能障碍跑项目，为国际现代五项、奥运级赛事储备体育人才。打造中国青少年第一体育赛事IP、打造中国青少年第一赛事运动平台。",
-        "posterPath": null,
-        "backdropPath": null,
-        "releaseDate": "2025-10-18",
         "rating": 0,
         "mediaType": "tv"
       }
