@@ -157,6 +157,15 @@
 			"url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/MovieParadise.js"
 		},
 		{
+			"id": "ystt.vod",
+			"title": "影视天堂",
+			"description": "影视天堂影片资源",
+			"requiredVersion": "0.0.1",
+			"version": "1.0.0",
+			"author": "两块",
+			"url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/ystt.js"
+		},
+		{
 			"id": "forward.combined.media.lists",
 			"title": "影视榜单",
 			"description": "聚合豆瓣、TMDB、IMDB和Bangumi的影视动画榜单",
