@@ -121,15 +121,6 @@
 			"url": "https://raw.githubusercontent.com/xbzl/Forward/refs/heads/main/Widgets/wuming.js"
 		},
 		{
-			"id": "vod_sream",
-			"title": "VOD Stream",
-			"description": "获取聚合VOD影片资源",
-			"requiredVersion": "0.0.1",
-			"version": "1.0.0",
-			"author": "两块",
-			"url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/VodStream.js"
-		},
-		{
 			"id": "forward.auto.danmu_api",
 			"title": "danmu_api弹幕",
 			"description": "从danmu_api获取弹幕【五折码：CHEAP.5;七折码：CHEAP】",
@@ -155,15 +146,6 @@
 			"version": "1.0.0",
 			"author": "两块",
 			"url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/MovieParadise.js"
-		},
-		{
-			"id": "ystt.vod",
-			"title": "影视天堂",
-			"description": "影视天堂影片资源",
-			"requiredVersion": "0.0.1",
-			"version": "1.0.0",
-			"author": "两块",
-			"url": "https://raw.githubusercontent.com/2kuai/ForwardWidgets/refs/heads/main/Widgets/ystt.js"
 		},
 		{
 			"id": "forward.combined.media.lists",
