@@ -15,13 +15,12 @@ const GENRE_MAP = {
 
 const MAX_COUNT = 100;
 const REQUEST_TIMEOUT = 15000;
-const MOVIE_DELAY = 100;
+const MOVIE_DELAY = 150; 
 
 const dir = './data';
 if (!fs.existsSync(dir)) fs.mkdirSync(dir);
 const FILE_PATH = path.join(dir, 'douban_movie_data.json');
 
-// 日志辅助函数
 const log = {
     info: (msg) => console.log(`\x1b[36m[INFO]\x1b[0m ${msg}`),
     success: (msg) => console.log(`\x1b[32m[SUCCESS]\x1b[0m ${msg}`),
@@ -33,78 +32,73 @@ const log = {
 // ================= 核心逻辑 =================
 
 /**
- * 匹配 TMDB 数据
- * 逻辑：优先使用 TMDB，只有封面/海报不存在时才用豆瓣补全
+ * 严格匹配 TMDB 数据
+ * 逻辑：只返回 TMDB 存在的数据，TMDB 没封面时才用豆瓣封面兜底
  */
-async function getAccurateMovieData(doubanItem) {
+async function getStrictTMDBData(doubanItem) {
     const title = doubanItem.title;
     const originalTitle = doubanItem.original_title;
     const year = parseInt(doubanItem.year);
+    const searchQuery = originalTitle || title;
 
     try {
+        // 新增：打印当前检索进度
+        process.stdout.write(`   🔍 匹配中: <${title}> (${year})... `);
+
         const searchRes = await axios.get(`https://api.themoviedb.org/3/search/movie`, {
             params: {
-                query: originalTitle || title,
-                language: 'zh-CN',
-                primary_release_year: year
+                query: searchQuery,
+                language: 'zh-CN'
             },
             headers: { 'Authorization': `Bearer ${TMDB_API_KEY}` },
             timeout: 10000
         });
 
         const results = searchRes.data.results || [];
-        // 寻找完全匹配或取第一个
-        const exactMatch = results.find(m => (m.title === title || m.original_title === originalTitle)) || (results.length > 0 ? results[0] : null);
+        
+        // 保持原逻辑：只找标题严格一致的
+        const match = results.find(m => (m.title == title || m.original_title == originalTitle)) || null;
 
-        if (exactMatch) {
-            const genreTitle = (exactMatch.genre_ids || []).map(id => GENRE_MAP[id]).filter(Boolean).join(',') || doubanItem.genres.join(',');
-            
+        if (match) {
+            // 新增：匹配成功日志
+            console.log(`\x1b[32m[OK]\x1b[0m`); 
             return {
-                id: exactMatch.id,
-                db_id: doubanItem.id,
+                id: match.id,
                 type: "tmdb",
-                title: exactMatch.title || title,
-                description: exactMatch.overview || doubanItem.summary || "",
-                rating: exactMatch.vote_average || doubanItem.rating.average,
-                voteCount: exactMatch.vote_count || 0,
-                popularity: exactMatch.popularity || 0,
-                releaseDate: exactMatch.release_date || doubanItem.year,
-                // 核心逻辑：只有当 TMDB 路径为空时，才回退到豆瓣图片
-                posterPath: exactMatch.poster_path ? `https://image.tmdb.org/t/p/w500${exactMatch.poster_path}` : doubanItem.images.large,
-                backdropPath: exactMatch.backdrop_path ? `https://image.tmdb.org/t/p/original${exactMatch.backdrop_path}` : "",
+                title: match.title,
+                description: match.overview || "",
+                rating: match.vote_average,
+                voteCount: match.vote_count,
+                popularity: match.popularity,
+                releaseDate: match.release_date || doubanItem.year,
+                posterPath: match.poster_path ? match.poster_path : doubanItem.images.large,
+                backdropPath: match.backdrop_path ? match.backdrop_path : doubanItem.images.large,
                 mediaType: "movie",
-                genreTitle: genreTitle
+                genreTitle: (match.genre_ids || []).map(id => GENRE_MAP[id]).filter(Boolean).join(',')
             };
+        } else {
+            // 新增：匹配失败日志（告知是因为没搜到还是标题不符）
+            const reason = results.length === 0 ? "TMDB无结果" : `标题不匹配(候选${results.length}个)`;
+            console.log(`\x1b[33m[SKIP]\x1b[0m ${reason}`);
         }
     } catch (err) {
-        log.warn(`TMDB 匹配失败 [${title}]: ${err.message}`);
+        console.log(`\x1b[31m[ERR]\x1b[0m ${err.message}`);
+        log.warn(`跳过匹配失败条目 [${title}]: ${err.message}`);
     }
 
-    // 彻底匹配不到 TMDB 时的 fallback
-    return {
-        id: doubanItem.id,
-        type: "douban",
-        title: title,
-        description: doubanItem.summary || "暂无简介",
-        rating: doubanItem.rating.average,
-        releaseDate: doubanItem.year,
-        posterPath: doubanItem.images.large,
-        backdropPath: "",
-        mediaType: "movie",
-        genreTitle: doubanItem.genres.join(',')
-    };
+    return null; // 保持原逻辑：搜不到或不匹配就彻底不要了
 }
+
 
 async function fetchAndSync(endpoint) {
     let allSubjects = [];
     let start = 0;
-    const isTop250 = endpoint === 'top250';
 
-    log.step(`开始同步分类: ${endpoint.toUpperCase()}`);
+    log.step(`同步分类: ${endpoint.toUpperCase()}`);
 
     while (true) {
         try {
-            process.stdout.write(`   正在拉取豆瓣分页 [${start}]... \r`);
+            process.stdout.write(`   拉取豆瓣种子 [${start}]... \r`);
             const res = await axios.post(`${BASE_URL}/${endpoint}`, {
                 apikey: DOUBAN_API_KEY,
                 start: start,
@@ -116,42 +110,42 @@ async function fetchAndSync(endpoint) {
 
             const subjects = res.data.subjects || [];
             if (subjects.length === 0) break;
-
             allSubjects = allSubjects.concat(subjects);
 
-            if (!isTop250 || allSubjects.length >= (res.data.total || 250)) break;
-
+            if (endpoint !== 'top250' || allSubjects.length >= (res.data.total || 250)) break;
             start += MAX_COUNT;
             await new Promise(r => setTimeout(r, 600)); 
         } catch (err) {
-            log.error(`分页请求异常: ${err.message}`);
+            log.error(`豆瓣列表中断: ${err.message}`);
             break;
         }
     }
 
-    log.info(`豆瓣拉取完成，共 ${allSubjects.length} 条。开始 TMDB 匹配补全...`);
+    log.info(`种子获取完成，正在过滤并转换 TMDB 数据...`);
     
     const results = [];
     for (let i = 0; i < allSubjects.length; i++) {
         const item = allSubjects[i];
-        const matched = await getAccurateMovieData(item);
-        results.push(matched);
+        const matched = await getStrictTMDBData(item);
         
-        // 打印实时处理进度
+        if (matched) {
+            results.push(matched);
+        }
+        
         const percent = (((i + 1) / allSubjects.length) * 100).toFixed(0);
-        process.stdout.write(`   进度: [${percent}%] 正在处理: ${item.title.padEnd(15).substring(0, 15)}\r`);
+        process.stdout.write(`   进度: [${percent}%] 成功入库: ${results.length}\r`);
         
         await new Promise(r => setTimeout(r, MOVIE_DELAY));
     }
     process.stdout.write('\n');
-    log.success(`${endpoint} 处理完毕，匹配成功率: ${((results.filter(r => r.type === 'tmdb').length / results.length) * 100).toFixed(1)}%`);
+    log.success(`${endpoint} 处理完毕，过滤掉 ${allSubjects.length - results.length} 个无法匹配的项目`);
     
     return results;
 }
 
 async function main() {
     const startTime = Date.now();
-    log.info("🎬 电影数据采集任务启动...");
+    log.info("🎬 启动 TMDB 纯净数据采集 (丢弃无匹配项)...");
 
     try {
         const finalResult = {
@@ -164,11 +158,11 @@ async function main() {
         fs.writeFileSync(FILE_PATH, JSON.stringify(finalResult, null, 2), 'utf-8');
         
         const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-        log.step(`任务圆满完成!`);
+        log.step(`任务完成!`);
         console.log(`--------------------------------------`);
-        console.log(`📊 总计耗时: ${duration}s`);
-        console.log(`📂 存储路径: ${FILE_PATH}`);
-        console.log(`📦 数据总量: ${finalResult.in_theaters.length + finalResult.coming_soon.length + finalResult.top250.length} 条`);
+        console.log(`📊 有效数据总量: ${finalResult.now_playing.length + finalResult.coming_soon.length + finalResult.top250.length}`);
+        console.log(`📂 文件存放在: ${FILE_PATH}`);
+        console.log(`⏱️ 耗时: ${duration}s`);
         console.log(`--------------------------------------`);
 
     } catch (mainErr) {
