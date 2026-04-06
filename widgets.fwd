@@ -4,24 +4,6 @@
 	"icon": "https://github.com/pack1r/ForwardWidgets/raw/main/icon.png",
 	"widgets": [
 		{
-			"id": "bangumi_charts_tmdb_v3",
-			"title": "Bangumi 热门榜单",
-			"description": "获取Bangumi近期热门、每日放送数据，支持榜单筛选。",
-			"requiredVersion": "0.0.1",
-			"version": "2.0.0",
-			"author": "Autism",
-			"url": "https://raw.githubusercontent.com/opix-maker/Forward/refs/heads/main/js/Bangumi_v2.0.0.js"
-		},
-		{
-			"id": "imdb_discovery_final_v2",
-			"title": "IMDb 分类资源 v2",
-			"description": "聚合 IMDb 热门影视资源",
-			"requiredVersion": "0.0.1",
-			"version": "2.0.0",
-			"author": "Autism",
-			"url": "https://raw.githubusercontent.com/opix-maker/Forward/refs/heads/main/js/IMDb.js"
-		},
-		{
 			"id": "letterboxd",
 			"title": "Letterboxd电影爱好者平台",
 			"description": "解析Letterboxd片单内的影片【30% off code：CHEAP】",
