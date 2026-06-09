@@ -4,6 +4,15 @@
 	"icon": "https://github.com/pack1r/ForwardWidgets/raw/main/icon.png",
 	"widgets": [
 		{
+			"id": "91porn",
+			"title": "91Porn",
+			"description": "获取 91Porn 视频",
+			"requiredVersion": "0.0.1",
+			"version": "0.9.4",
+			"author": "Baran",
+			"url": "https://github.com/baranwang/forward-widget/releases/latest/download/91porn.js"
+		},
+		{
 			"id": "letterboxd",
 			"title": "Letterboxd电影爱好者平台",
 			"description": "解析Letterboxd片单内的影片【30% off code：CHEAP】",
