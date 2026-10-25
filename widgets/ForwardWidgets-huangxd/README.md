@@ -1,13 +1,5 @@
 # ForwardWidgets
 
-<p align="center">
-  <img src="https://i.miji.bid/2025/05/08/a7472460007b57687f659b8727f52755.md.jpeg" alt="欢迎使用我的五折码" width="300px"/>
-  <br>
-  五折码：CHEAP.5
-  <br>
-  七折码：CHEAP
-</p>
-
 以下插件纯属个人爱好，侵删谢谢。
 
 纯为爱发电，模块只是自己要用，然后顺便分享，有问题可以私信机器人 https://t.me/ddjdd_bot ，感谢😊
